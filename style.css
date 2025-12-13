@@ -1,21 +1,27 @@
-/* ===== GLOBAL BACKGROUND ===== */
-body{
+/* ===== GLOBAL RESET ===== */
+*{
   margin:0;
-  font-family:'Segoe UI', sans-serif;
+  padding:0;
+  box-sizing:border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* ===== DARK NEON BACKGROUND ===== */
+body{
   background:radial-gradient(circle at top, #020b1f, #000814);
   color:#eafcff;
 }
 
-/* ===== FLOATING NEON SIDEBAR ===== */
+/* ===== FLOATING SIDEBAR ===== */
 #sidebar{
   position:fixed;
   top:50%;
-  left:10px;
+  left:12px;
   transform:translateY(-50%);
-  background:rgba(5, 15, 35, 0.9);
+  background:rgba(5,15,35,0.95);
   padding:6px;
   border-radius:18px;
-  box-shadow:0 0 20px #00bfff;
+  box-shadow:0 0 18px #00bfff;
   z-index:1000;
 }
 
@@ -23,64 +29,35 @@ body{
   display:block;
   padding:10px 12px;
   margin:6px 0;
-  color:#00eaff;
-  text-decoration:none;
   font-size:13px;
   font-weight:600;
+  color:#00eaff;
+  text-decoration:none;
   border-radius:12px;
   text-align:center;
   background:rgba(0,234,255,0.08);
-  transition:0.25s ease;
+  transition:0.25s;
 }
 
 .menu-item:hover{
   background:#00eaff;
   color:#000;
   box-shadow:0 0 12px #00eaff;
-  transform:scale(1.05);
 }
 
-/* ===== PAGE LAYOUT ===== */
+/* ===== PAGE CONTENT ===== */
 .container{
   margin-left:90px;
   padding:20px;
   max-width:520px;
 }
 
-/* ===== FLOATING DIGITAL CARDS ===== */
+/* ===== FLOATING CARDS ===== */
 .card{
-  background:rgba(10,20,50,0.85);
-  border-radius:20px;
+  background:rgba(10,20,50,0.9);
+  border-radius:18px;
   padding:18px;
-  margin-bottom:20px;
+  margin-bottom:18px;
   box-shadow:0 0 18px rgba(0,234,255,0.3);
   border:1px solid rgba(0,234,255,0.2);
-  backdrop-filter: blur(10px);
-  transition:0.3s ease;
-}
-
-.card:hover{
-  transform:translateY(-4px);
-  box-shadow:0 0 25px rgba(0,234,255,0.6);
-}
-
-/* ===== WHATSAPP FLOATING BUTTON ===== */
-#whatsappBtn{
-  position:fixed;
-  width:56px;
-  height:56px;
-  bottom:18px;
-  right:18px;
-  background:white;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  box-shadow:0 0 15px #25D366;
-  z-index:1000;
-}
-
-#whatsappBtn img{
-  width:32px;
-  height:32px;
 }
