@@ -1,205 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="style.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Buy Data - Samba531 Data</title>
+<title>Buy Data - Samba531</title>
 <link rel="stylesheet" href="style.css">
-<style>
-/* --- Floating Sidebar --- */
-#sidebar{
-  position:fixed;
-  top:50%;
-  left:0;
-  transform:translateY(-50%);
-  background:linear-gradient(180deg,#0073e6,#00bfff);
-  padding:10px;
-  border-top-right-radius:20px;
-  border-bottom-right-radius:20px;
-  box-shadow:4px 4px 15px rgba(0,0,0,0.3);
-  z-index:1000;
-}
-.menu-item{
-  display:block;
-  padding:15px 20px;
-  margin:10px 0;
-  color:white;
-  text-decoration:none;
-  font-weight:bold;
-  font-size:16px;
-  border-radius:12px;
-  text-align:center;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(8px);
-}
-.menu-item:hover{
-  transform:translateX(5px) scale(1.05);
-  background:rgba(255,255,255,0.2);
-  box-shadow:0 6px 12px rgba(0,0,0,0.3);
-}
-
-/* --- Container & Cards --- */
-.container{
-  margin-left:100px;
-  max-width:500px;
-  margin-top:30px;
-}
-.card{
-  background:white;
-  border-radius:20px;
-  padding:20px;
-  margin-bottom:20px;
-  box-shadow:0 10px 20px rgba(0,0,0,0.25);
-  text-align:center;
-  transition: all 0.3s ease;
-}
-.card:hover{
-  transform: translateY(-5px) scale(1.03);
-  box-shadow:0 15px 25px rgba(0,0,0,0.3);
-}
-.card h2{margin:10px 0; color:#0073e6;}
-
-/* --- Network Buttons --- */
-.network-btn{
-  padding:12px;
-  margin:5px 0;
-  border:none;
-  border-radius:12px;
-  font-weight:bold;
-  cursor:pointer;
-  width:90%;
-  font-size:16px;
-  transition: all 0.2s ease;
-}
-.network-btn:hover{transform:scale(1.05);}
-.mtn{background:#ffc107;color:#000;}
-.airteltigo{background:#0dcaf0;color:white;}
-.telecel{background:#dc3545;color:white;}
-
-/* --- Phone Prompt --- */
-#phonePrompt{
-  display:none;
-  background:white;
-  padding:15px;
-  border-radius:15px;
-  box-shadow:0 10px 20px rgba(0,0,0,0.25);
-  margin-top:15px;
-  text-align:center;
-}
-#phonePrompt input, #phonePrompt button{
-  width:90%;
-  padding:12px;
-  margin:8px 0;
-  border-radius:10px;
-  border:none;
-  font-size:16px;
-}
-#sendBundle{background:#198754;color:white; cursor:pointer;}
-#sendBundle:hover{opacity:0.9;}
-
-/* --- WhatsApp Button --- */
-#whatsappBtn{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  width:70px;
-  height:70px;
-  border-radius:50%;
-  background:white;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  z-index:1000;
-  box-shadow:0 8px 20px rgba(0,0,0,0.3);
-  transition: all 0.2s ease;
-}
-#whatsappBtn img{
-  width:40px;
-  height:40px;
-}
-#whatsappBtn:hover{
-  transform:scale(1.1) rotate(5deg);
-  box-shadow:0 12px 25px rgba(0,0,0,0.4);
-}
-
-/* --- Page Header --- */
-h1{text-align:center;font-size:28px;color:#0073e6;text-shadow:2px 2px 5px rgba(0,0,0,0.2);}
-</style>
 </head>
 <body>
 
-<!-- Sidebar -->
+<!-- FLOATING SIDEBAR -->
 <div id="sidebar">
   <a href="index.html" class="menu-item">🏠 Home</a>
   <a href="data.html" class="menu-item">📡 Buy Data</a>
   <a href="wallet.html" class="menu-item">💰 Wallet</a>
-  <a href="transactions.html" class="menu-item">📄 Transactions</a>
+  <a href="transactions.html" class="menu-item">📄 History</a>
   <a href="profile.html" class="menu-item">👤 Profile</a>
 </div>
 
-<!-- Main Container -->
+<!-- PAGE CONTENT -->
 <div class="container">
-  <h1>Buy Data</h1>
 
-  <!-- Bundle Cards -->
-  <div class="card" data-bundle="1GB">
-    <h2>1GB – GHS 6</h2>
-    <button class="network-btn mtn">MTN</button>
-    <button class="network-btn airteltigo">AirtelTigo</button>
-    <button class="network-btn telecel">Telecel</button>
-  </div>
-  <div class="card" data-bundle="2GB">
-    <h2>2GB – GHS 12</h2>
-    <button class="network-btn mtn">MTN</button>
-    <button class="network-btn airteltigo">AirtelTigo</button>
-    <button class="network-btn telecel">Telecel</button>
+  <div class="card">
+    <h2>Buy Data Bundles</h2>
+    <p>Select a network, bundle and enter the phone number.</p>
   </div>
 
-  <!-- Phone Input Prompt -->
-  <div id="phonePrompt">
-    <input type="text" id="receiverNumber" placeholder="Enter recipient number">
-    <button id="sendBundle">Send Bundle</button>
+  <!-- MTN -->
+  <div class="card">
+    <h3>🟡 MTN Data</h3>
+    <p>1GB — GHS 5</p>
+    <p>2GB — GHS 10</p>
+    <p>3GB — GHS 15</p>
+    <p>4GB — GHS 20</p>
+    <p>5GB — GHS 25</p>
+    <p>6GB — GHS 30</p>
   </div>
+
+  <!-- TELECEL -->
+  <div class="card">
+    <h3>🔴 Telecel Data</h3>
+    <p>5GB — GHS 27</p>
+    <p>10GB — GHS 49</p>
+    <p>15GB — GHS 65</p>
+  </div>
+
+  <!-- AIRTELTIGO -->
+  <div class="card">
+    <h3>🟠 AirtelTigo Data</h3>
+    <p>1GB — GHS 4.90</p>
+    <p>2GB — GHS 9.80</p>
+    <p>3GB — GHS 14.70</p>
+  </div>
+
 </div>
-
-<!-- WhatsApp Button -->
-<a href="https://chat.whatsapp.com/K0S5SJMX1scI6MVZ6LAw3p" target="_blank" id="whatsappBtn">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
-</a>
-
-<script>
-const bundlePrices = { "1GB":6, "2GB":12 };
-let selectedBundle = '';
-let selectedNetwork = '';
-let price = 0;
-
-function showPhonePrompt(bundle, network, priceValue){
-  selectedBundle = bundle;
-  selectedNetwork = network;
-  price = priceValue;
-  document.getElementById('phonePrompt').style.display = 'block';
-}
-
-document.querySelectorAll('.network-btn').forEach(btn=>{
-  btn.addEventListener('click', ()=>{
-    const card = btn.closest('.card');
-    const bundle = card.getAttribute('data-bundle');
-    const network = btn.textContent;
-    const priceValue = bundlePrices[bundle];
-    showPhonePrompt(bundle, network, priceValue);
-  });
-});
-
-document.getElementById('sendBundle').addEventListener('click', ()=>{
-  const number = document.getElementById('receiverNumber').value;
-  if(!number){ alert('Enter recipient number'); return; }
-  // Placeholder: send order to backend
-  alert(`Order sent!\nBundle: ${selectedBundle}\nNetwork: ${selectedNetwork}\nPrice: GHS ${price}\nNumber: ${number}`);
-  document.getElementById('phonePrompt').style.display='none';
-  document.getElementById('receiverNumber').value='';
-});
-</script>
 
 </body>
 </html>
