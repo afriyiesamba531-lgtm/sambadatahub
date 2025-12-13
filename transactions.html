@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transactions - Samba531 Data</title>
+<link rel="stylesheet" href="style.css">
+<style>
+/* --- Floating Sidebar --- */
+#sidebar{
+  position:fixed;
+  top:50%;
+  left:0;
+  transform:translateY(-50%);
+  background:linear-gradient(180deg,#0073e6,#00bfff);
+  padding:10px;
+  border-top-right-radius:20px;
+  border-bottom-right-radius:20px;
+  box-shadow:4px 4px 15px rgba(0,0,0,0.3);
+  z-index:1000;
+}
+.menu-item{
+  display:block;
+  padding:15px 20px;
+  margin:10px 0;
+  color:white;
+  text-decoration:none;
+  font-weight:bold;
+  font-size:16px;
+  border-radius:12px;
+  text-align:center;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+}
+.menu-item:hover{
+  transform:translateX(5px) scale(1.05);
+  background:rgba(255,255,255,0.2);
+  box-shadow:0 6px 12px rgba(0,0,0,0.3);
+}
+
+/* --- Container & Cards --- */
+.container{
+  margin-left:100px;
+  max-width:500px;
+  margin-top:30px;
+}
+.card{
+  background:white;
+  border-radius:20px;
+  padding:20px;
+  margin-bottom:20px;
+  box-shadow:0 10px 20px rgba(0,0,0,0.25);
+  transition: all 0.3s ease;
+  text-align:left;
+}
+.card:hover{
+  transform: translateY(-5px) scale(1.03);
+  box-shadow:0 15px 25px rgba(0,0,0,0.3);
+}
+.card h3{margin:0 0 5px 0; color:#0073e6;}
+.card p{margin:2px 0; font-size:14px; color:#333;}
+
+/* --- WhatsApp Button --- */
+#whatsappBtn{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  width:70px;
+  height:70px;
+  border-radius:50%;
+  background:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:1000;
+  box-shadow:0 8px 20px rgba(0,0,0,0.3);
+  transition: all 0.2s ease;
+}
+#whatsappBtn img{
+  width:40px;
+  height:40px;
+}
+#whatsappBtn:hover{
+  transform:scale(1.1) rotate(5deg);
+  box-shadow:0 12px 25px rgba(0,0,0,0.4);
+}
+
+/* --- Page Header --- */
+h1{text-align:center;font-size:28px;color:#0073e6;text-shadow:2px 2px 5px rgba(0,0,0,0.2);}
+</style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<div id="sidebar">
+  <a href="index.html" class="menu-item">🏠 Home</a>
+  <a href="data.html" class="menu-item">📡 Buy Data</a>
+  <a href="wallet.html" class="menu-item">💰 Wallet</a>
+  <a href="transactions.html" class="menu-item">📄 Transactions</a>
+  <a href="profile.html" class="menu-item">👤 Profile</a>
+</div>
+
+<!-- Main Container -->
+<div class="container">
+  <h1>Transactions</h1>
+
+  <div id="transactionsList">
+    <div class="card">
+      <h3>No transactions yet.</h3>
+      <p>All your purchases and top-ups will appear here.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Floating WhatsApp Button -->
+<a href="https://chat.whatsapp.com/K0S5SJMX1scI6MVZ6LAw3p" target="_blank" id="whatsappBtn">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
+</a>
+
+<script>
+// Example transaction data
+let transactions = [
+  // Example:
+  // {type:'Top-up', amount:20, date:'2025-12-13 12:00'},
+  // {type:'Data Purchase', bundle:'2GB', network:'MTN', price:12, number:'024XXXXXXX', date:'2025-12-13 12:05'}
+];
+
+function renderTransactions(){
+  const listEl = document.getElementById('transactionsList');
+  if(transactions.length === 0){
+    listEl.innerHTML = `<div class="card"><h3>No transactions yet.</h3><p>All your purchases and top-ups will appear here.</p></div>`;
+    return;
+  }
+  listEl.innerHTML = '';
+  transactions.forEach(tx=>{
+    const card = document.createElement('div');
+    card.className = 'card';
+    if(tx.type === 'Top-up'){
+      card.innerHTML = `<h3>Top-up: GHS ${tx.amount}</h3><p>Date: ${tx.date}</p>`;
+    } else if(tx.type === 'Data Purchase'){
+      card.innerHTML = `<h3>Data: ${tx.bundle}</h3>
+                        <p>Network: ${tx.network}</p>
+                        <p>Number: ${tx.number}</p>
+                        <p>Price: GHS ${tx.price}</p>
+                        <p>Date: ${tx.date}</p>`;
+    }
+    listEl.appendChild(card);
+  });
+}
+renderTransactions();
+</script>
+
+</body>
+</html>
