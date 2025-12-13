@@ -3,65 +3,168 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Confirm Purchase</title>
+<title>Samba531 Data - Home</title>
 <link rel="stylesheet" href="style.css">
 <style>
-/* Floating popup modal */
-#successModal {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #001f3f;
-  border-radius: 16px;
-  padding: 25px 40px;
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #001f3f;
   color: #00eaff;
-  font-size: 18px;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Particle background */
+.particle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: #00eaff;
+  border-radius: 50%;
+  opacity: 0.7;
+  animation: floatParticle 10s linear infinite;
+}
+
+@keyframes floatParticle {
+  0% { transform: translateY(0) translateX(0); opacity: 0.5; }
+  50% { opacity: 1; }
+  100% { transform: translateY(-800px) translateX(100px); opacity: 0; }
+}
+
+/* Floating Sidebar */
+#sidebar {
+  position: fixed;
+  top: 10%;
+  left: 10px;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+}
+
+#sidebar .menu-item {
+  margin: 10px 0;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: #001f3f;
+  color: #00eaff;
+  text-decoration: none;
   font-weight: bold;
   text-align: center;
-  box-shadow: 0 0 15px #00eaff, 0 0 25px #00eaff, 0 0 35px #00eaff;
-  animation: bounceGlow 0.8s ease-in-out;
+  box-shadow: 0 0 10px #00eaff;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
-/* Bounce + neon glow animation */
-@keyframes bounceGlow {
-  0% { transform: translate(-50%, -60%) scale(0.5); opacity: 0; box-shadow: 0 0 5px #00eaff; }
-  50% { transform: translate(-50%, -50%) scale(1.05); opacity: 1; box-shadow: 0 0 25px #00eaff, 0 0 40px #00eaff; }
-  70% { transform: translate(-50%, -52%) scale(0.95); }
-  100% { transform: translate(-50%, -50%) scale(1); }
+#sidebar .menu-item:hover {
+  transform: translateX(5px);
+  box-shadow: 0 0 25px #00eaff;
 }
 
-#successModal button {
-  margin-top: 15px;
-  padding: 10px 20px;
+/* Floating WhatsApp button */
+#whatsapp {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #25D366;
+  color: #fff;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 30px;
+  line-height: 60px;
+  cursor: pointer;
+  box-shadow: 0 0 15px #25D366;
+  z-index: 1000;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#whatsapp:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 25px #25D366;
+}
+
+/* Hero Section */
+.hero {
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  z-index: 1;
+  position: relative;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  animation: neonGlow 1.5s ease-in-out infinite alternate;
+}
+
+.hero p {
+  margin-top: 10px;
+  font-size: 1.2rem;
+}
+
+.hero button {
+  margin-top: 20px;
+  padding: 12px 25px;
   border-radius: 12px;
   border: none;
-  background-color: #00eaff;
+  background: #00eaff;
   color: #001f3f;
   font-weight: bold;
   cursor: pointer;
+  box-shadow: 0 0 15px #00eaff;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
-/* Confetti particles */
-.particle {
-  position: fixed;
-  font-size: 24px;
-  z-index: 9999;
-  pointer-events: none;
-  animation: rise 2s linear forwards;
+.hero button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px #00eaff;
 }
 
-@keyframes rise {
-  0% { transform: translateY(0) rotate(0deg); opacity:1; }
-  100% { transform: translateY(-200px) rotate(360deg); opacity:0; }
+@keyframes neonGlow {
+  0% { text-shadow: 0 0 5px #00eaff, 0 0 10px #00eaff, 0 0 20px #00eaff; }
+  50% { text-shadow: 0 0 15px #00eaff, 0 0 30px #00eaff, 0 0 50px #00eaff; }
+  100% { text-shadow: 0 0 5px #00eaff, 0 0 10px #00eaff, 0 0 20px #00eaff; }
 }
+
+/* Bundle cards */
+.bundle-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 50px;
+  z-index: 1;
+  position: relative;
+}
+
+.bundle-card {
+  background: #001f3f;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 15px;
+  width: 150px;
+  text-align: center;
+  box-shadow: 0 0 10px #00eaff;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.bundle-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 0 25px #00eaff;
+}
+
+.bundle-card h3 { margin: 0; font-size: 1.2rem; }
+.bundle-card p { margin: 5px 0 0 0; }
+
 </style>
 </head>
 <body>
 
-<!-- SIDEBAR -->
+<!-- Floating Sidebar -->
 <div id="sidebar">
   <a href="index.html" class="menu-item">🏠 Home</a>
   <a href="data.html" class="menu-item">📡 Buy Data</a>
@@ -70,103 +173,50 @@
   <a href="profile.html" class="menu-item">👤 Profile</a>
 </div>
 
-<div class="container">
-  <div class="card">
-    <h2>Confirm Purchase</h2>
-    <p id="details"></p>
+<!-- WhatsApp floating button -->
+<div id="whatsapp" onclick="window.open('https://chat.whatsapp.com/K0S5SJMX1scI6MVZ6LAw3p','_blank')">💬</div>
 
-    <input id="phone" type="tel" placeholder="Enter phone number" style="width:100%;padding:12px;border-radius:12px;border:none;margin-top:12px;">
+<!-- Particle background container -->
+<div id="particles"></div>
 
-    <button onclick="confirmOrder()" style="
-      margin-top:14px;
-      width:100%;
-      padding:12px;
-      border-radius:14px;
-      border:none;
-      background:#00eaff;
-      font-weight:bold;
-      cursor:pointer;
-    ">Confirm Purchase</button>
+<!-- Hero Section -->
+<div class="hero">
+  <h1>Welcome to Samba531 Data!</h1>
+  <p>Fast, Secure, Affordable – Buy Your Data Instantly</p>
+  <button onclick="window.location.href='data.html'">Buy Data Now</button>
+</div>
+
+<!-- Bundle Section -->
+<div class="bundle-section">
+  <div class="bundle-card" onclick="window.location.href='data.html?network=MTN'">
+    <h3>MTN</h3>
+    <p>1GB - 5 GHS</p>
+    <p>2GB - 10 GHS</p>
+  </div>
+  <div class="bundle-card" onclick="window.location.href='data.html?network=AirtelTigo'">
+    <h3>AirtelTigo</h3>
+    <p>1GB - 4.9 GHS</p>
+    <p>2GB - 9.8 GHS</p>
+  </div>
+  <div class="bundle-card" onclick="window.location.href='data.html?network=Telecel'">
+    <h3>Telecel</h3>
+    <p>5GB - 27 GHS</p>
+    <p>10GB - 49 GHS</p>
   </div>
 </div>
 
-<!-- Floating Popup Modal -->
-<div id="successModal">
-  ☺️ Order has been placed successfully 😁
-  <br>
-  <button onclick="closeModal()">Close</button>
-</div>
-
 <script>
-const params = new URLSearchParams(window.location.search);
-const network = params.get('network');
-const bundle = params.get('bundle');
-const price = params.get('price');
-
-document.getElementById('details').innerHTML =
-  `<strong>Network:</strong> ${network}<br>
-   <strong>Bundle:</strong> ${bundle}<br>
-   <strong>Price:</strong> GHS ${price}`;
-
-// Function to spawn Hurray particles
-function spawnParticles() {
-  const emojis = ['🎉','😁','🥳','✨','🎊'];
-  for(let i=0;i<15;i++){
-    const p = document.createElement('div');
-    p.classList.add('particle');
-    p.style.left = Math.random() * window.innerWidth + 'px';
-    p.innerText = emojis[Math.floor(Math.random() * emojis.length)];
-    document.body.appendChild(p);
-    setTimeout(()=>p.remove(), 2000);
-  }
-}
-
-function confirmOrder(){
-  const phone = document.getElementById('phone').value;
-
-  if(phone.length < 9){
-    alert("Enter a valid phone number");
-    return;
-  }
-
-  // Direct API call
-  fetch("https://s5HX8RmBLOe2WpmQdu0WAYS9z302", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": "Bearer sk_test_0b5ad6ecb17aa96fd58fbfad6660fbe56351d2ad"
-    },
-    body: JSON.stringify({
-      network: network,
-      bundle: bundle,
-      phone: phone
-    })
-  })
-  .then(res => res.json())
-  .then(data => {
-    if(data.success){
-      // Show floating modal
-      document.getElementById('successModal').style.display = "block";
-      // Spawn Hurray particles
-      spawnParticles();
-    } else {
-      alert("❌ Order failed. Please try again.");
-      console.log(data);
-    }
-  })
-  .catch(err => {
-    alert("❌ Order failed. Please try again.");
-    console.log(err);
-  });
-}
-
-// Close the floating modal
-function closeModal(){
-  document.getElementById('successModal').style.display = "none";
-  // Optional: redirect back to data.html
-  // window.location.href = "data.html";
+// Generate floating neon particles
+for(let i=0;i<50;i++){
+  const particle = document.createElement('div');
+  particle.classList.add('particle');
+  particle.style.left = Math.random() * window.innerWidth + 'px';
+  particle.style.top = Math.random() * window.innerHeight + 'px';
+  particle.style.animationDuration = (5 + Math.random()*5) + 's';
+  particle.style.width = particle.style.height = (3 + Math.random()*5) + 'px';
+  document.body.appendChild(particle);
 }
 </script>
 
 </body>
-    </html>
+</html>
