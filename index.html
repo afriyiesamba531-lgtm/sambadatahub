@@ -277,3 +277,98 @@ document.querySelectorAll('.network-btn').forEach(btn=>{
   font-size:16px;
 }
 </style>
+<!-- Three Dots Button -->
+<div id="menuDots">⋮</div>
+
+<style>
+#menuDots{
+  position:fixed;
+  top:20px;
+  left:20px;
+  font-size:28px;
+  cursor:pointer;
+  z-index:1000;
+}
+#depositPanel{
+  position:fixed;
+  top:60px;
+  left:20px;
+  width:250px;
+  background:white;
+  color:#333;
+  padding:15px;
+  border-radius:10px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.2);
+  display:none;
+  z-index:1000;
+}
+#depositPanel input, #depositPanel button{
+  width:100%;
+  padding:10px;
+  margin:5px 0;
+  border-radius:6px;
+  border:none;
+  font-size:16px;
+  cursor:pointer;
+}
+#depositBtn{
+  background:#198754;
+  color:white;
+}
+</style>
+
+<div id="depositPanel">
+  <h3>Top Up Wallet</h3>
+  <input type="number" id="depositAmount" placeholder="Enter amount">
+  <button id="depositBtn">Deposit</button>
+</div>
+
+<script>
+const dots = document.getElementById('menuDots');
+const panel = document.getElementById('depositPanel');
+
+dots.addEventListener('click',()=>{
+  panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+});
+</script>
+<div id="phonePrompt" style="display:none;">
+  <input type="text" id="receiverNumber" placeholder="Enter recipient number">
+  <button id="sendBundle">Send Bundle</button>
+</div>
+
+<script>
+function showPhonePrompt(bundle, network, price){
+  const prompt = document.getElementById('phonePrompt');
+  prompt.style.display = 'block';
+
+  document.getElementById('sendBundle').onclick = ()=>{
+    const number = document.getElementById('receiverNumber').value;
+    if(!number){ alert('Enter recipient number'); return; }
+
+    fetch("https://YOUR_BACKEND_URL/order",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({ network, bundle, price, phone:number })
+    })
+    .then(r=>r.json())
+    .then(d=>{
+      if(d.success){
+        alert('Bundle sent successfully!');
+        prompt.style.display='none';
+        document.getElementById('receiverNumber').value='';
+      } else alert('Order failed!');
+    });
+  };
+}
+
+// Example usage when a purchase button is clicked
+document.querySelectorAll('.network-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const card = btn.closest('.card');
+    const bundle = card.getAttribute('data-bundle');
+    const network = btn.textContent;
+    const price = bundlePrices[bundle];
+    showPhonePrompt(bundle, network, price);
+  });
+});
+  </script>
