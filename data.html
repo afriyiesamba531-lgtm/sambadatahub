@@ -5,10 +5,119 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Buy Data - Samba531</title>
 <link rel="stylesheet" href="style.css">
+<style>
+body {
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  background:#001f3f;
+  color:#00eaff;
+  overflow-x:hidden;
+  position:relative;
+}
+
+/* Particle background */
+.particle {
+  position:absolute;
+  width:8px;
+  height:8px;
+  background:#00eaff;
+  border-radius:50%;
+  opacity:0.7;
+  animation:floatParticle 10s linear infinite;
+}
+
+@keyframes floatParticle {
+  0% {transform:translateY(0) translateX(0); opacity:0.5;}
+  50%{opacity:1;}
+  100%{transform:translateY(-800px) translateX(100px); opacity:0;}
+}
+
+/* Floating Sidebar */
+#sidebar {
+  position:fixed;
+  top:10%;
+  left:10px;
+  display:flex;
+  flex-direction:column;
+  z-index:1000;
+}
+
+#sidebar .menu-item {
+  margin:10px 0;
+  padding:10px 14px;
+  border-radius:12px;
+  background:#001f3f;
+  color:#00eaff;
+  text-decoration:none;
+  font-weight:bold;
+  text-align:center;
+  box-shadow:0 0 10px #00eaff;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#sidebar .menu-item:hover {
+  transform:translateX(5px);
+  box-shadow:0 0 25px #00eaff;
+}
+
+/* Floating WhatsApp button */
+#whatsapp {
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#25D366;
+  color:#fff;
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  text-align:center;
+  font-size:30px;
+  line-height:60px;
+  cursor:pointer;
+  box-shadow:0 0 15px #25D366;
+  z-index:1000;
+  transition:transform 0.2s,box-shadow 0.2s;
+}
+
+#whatsapp:hover {
+  transform:scale(1.1);
+  box-shadow:0 0 25px #25D366;
+}
+
+/* Bundle cards */
+.bundle-section {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  margin-top:50px;
+  z-index:1;
+  position:relative;
+}
+
+.bundle-card {
+  background:#001f3f;
+  border-radius:12px;
+  padding:20px;
+  margin:15px;
+  width:150px;
+  text-align:center;
+  box-shadow:0 0 10px #00eaff;
+  cursor:pointer;
+  transition:transform 0.2s,box-shadow 0.2s;
+}
+
+.bundle-card:hover {
+  transform:translateY(-10px);
+  box-shadow:0 0 25px #00eaff;
+}
+
+.bundle-card h3 { margin:0; font-size:1.2rem; }
+.bundle-card p { margin:5px 0 0 0; }
+</style>
 </head>
 <body>
 
-<!-- SIDEBAR -->
+<!-- Sidebar -->
 <div id="sidebar">
   <a href="index.html" class="menu-item">🏠 Home</a>
   <a href="data.html" class="menu-item">📡 Buy Data</a>
@@ -17,41 +126,47 @@
   <a href="profile.html" class="menu-item">👤 Profile</a>
 </div>
 
-<div class="container">
+<!-- WhatsApp -->
+<div id="whatsapp" onclick="window.open('https://chat.whatsapp.com/K0S5SJMX1scI6MVZ6LAw3p','_blank')">💬</div>
 
-  <div class="card">
-    <h2>Buy Data Bundles</h2>
-    <p>Tap a bundle to continue</p>
+<!-- Particle background -->
+<div id="particles"></div>
+
+<h2 style="text-align:center;margin-top:20px;">Select Your Network</h2>
+
+<div class="bundle-section">
+  <div class="bundle-card" onclick="window.location.href='purchase.html?network=MTN&bundle=1GB&price=5'">
+    <h3>MTN</h3>
+    <p>1GB - 5 GHS</p>
+    <p>2GB - 10 GHS</p>
+    <p>3GB - 15 GHS</p>
   </div>
-
-  <!-- MTN -->
-  <div class="card">
-    <h3>🟡 MTN</h3>
-    <a class="menu-item" href="purchase.html?network=MTN&bundle=1GB&price=5">1GB — GHS 5</a>
-    <a class="menu-item" href="purchase.html?network=MTN&bundle=2GB&price=10">2GB — GHS 10</a>
-    <a class="menu-item" href="purchase.html?network=MTN&bundle=3GB&price=15">3GB — GHS 15</a>
-    <a class="menu-item" href="purchase.html?network=MTN&bundle=4GB&price=20">4GB — GHS 20</a>
-    <a class="menu-item" href="purchase.html?network=MTN&bundle=5GB&price=25">5GB — GHS 25</a>
-    <a class="menu-item" href="purchase.html?network=MTN&bundle=6GB&price=30">6GB — GHS 30</a>
+  <div class="bundle-card" onclick="window.location.href='purchase.html?network=AirtelTigo&bundle=1GB&price=4.9'">
+    <h3>AirtelTigo</h3>
+    <p>1GB - 4.9 GHS</p>
+    <p>2GB - 9.8 GHS</p>
+    <p>3GB - 14.7 GHS</p>
   </div>
-
-  <!-- TELECEL -->
-  <div class="card">
-    <h3>🔴 Telecel</h3>
-    <a class="menu-item" href="purchase.html?network=Telecel&bundle=5GB&price=27">5GB — GHS 27</a>
-    <a class="menu-item" href="purchase.html?network=Telecel&bundle=10GB&price=49">10GB — GHS 49</a>
-    <a class="menu-item" href="purchase.html?network=Telecel&bundle=15GB&price=65">15GB — GHS 65</a>
+  <div class="bundle-card" onclick="window.location.href='purchase.html?network=Telecel&bundle=5GB&price=27'">
+    <h3>Telecel</h3>
+    <p>5GB - 27 GHS</p>
+    <p>10GB - 49 GHS</p>
+    <p>15GB - 65 GHS</p>
   </div>
-
-  <!-- AIRTELTIGO -->
-  <div class="card">
-    <h3>🟠 AirtelTigo</h3>
-    <a class="menu-item" href="purchase.html?network=AirtelTigo&bundle=1GB&price=4.90">1GB — GHS 4.90</a>
-    <a class="menu-item" href="purchase.html?network=AirtelTigo&bundle=2GB&price=9.80">2GB — GHS 9.80</a>
-    <a class="menu-item" href="purchase.html?network=AirtelTigo&bundle=3GB&price=14.70">3GB — GHS 14.70</a>
-  </div>
-
 </div>
 
+<script>
+// Generate floating neon particles
+for(let i=0;i<50;i++){
+  const particle = document.createElement('div');
+  particle.classList.add('particle');
+  particle.style.left = Math.random()*window.innerWidth + 'px';
+  particle.style.top = Math.random()*window.innerHeight + 'px';
+  particle.style.animationDuration = (5 + Math.random()*5)+'s';
+  particle.style.width = particle.style.height = (3 + Math.random()*5)+'px';
+  document.body.appendChild(particle);
+}
+</script>
+
 </body>
-  </html>
+</html>
