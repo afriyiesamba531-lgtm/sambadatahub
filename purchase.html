@@ -12,6 +12,9 @@
 <div id="sidebar">
   <a href="index.html" class="menu-item">🏠 Home</a>
   <a href="data.html" class="menu-item">📡 Buy Data</a>
+  <a href="wallet.html" class="menu-item">💰 Wallet</a>
+  <a href="transactions.html" class="menu-item">📄 History</a>
+  <a href="profile.html" class="menu-item">👤 Profile</a>
 </div>
 
 <div class="container">
@@ -47,17 +50,6 @@ document.getElementById('details').innerHTML =
    <strong>Bundle:</strong> ${bundle}<br>
    <strong>Price:</strong> GHS ${price}`;
 
-<script>
-const params = new URLSearchParams(window.location.search);
-const network = params.get('network');
-const bundle = params.get('bundle');
-const price = params.get('price');
-
-document.getElementById('details').innerHTML =
-  `<strong>Network:</strong> ${network}<br>
-   <strong>Bundle:</strong> ${bundle}<br>
-   <strong>Price:</strong> GHS ${price}`;
-
 function confirmOrder(){
   const phone = document.getElementById('phone').value;
 
@@ -66,36 +58,32 @@ function confirmOrder(){
     return;
   }
 
-  const orderData = {
-    api_key: "s5HX8RmBLOe2WpmQdu0WAYS9z302",
-    network: network,
-    bundle: bundle,
-    price: price,
-    phone: phone
-  };
-
-  fetch("https://YOUR-BACKEND-URL/send-order", {
+  // Direct call to your data API
+  fetch("https://s5HX8RmBLOe2WpmQdu0WAYS9z302", {
     method: "POST",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      "Authorization": "Bearer sk_test_0b5ad6ecb17aa96fd58fbfad6660fbe56351d2ad"
     },
-    body: JSON.stringify(orderData)
+    body: JSON.stringify({
+      network: network,
+      bundle: bundle,
+      phone: phone
+    })
   })
   .then(res => res.json())
   .then(data => {
-    alert("✅ Order submitted successfully! Data will be delivered shortly.");
+    if(data.success){
+      alert("✅ Order submitted successfully! Data will be delivered shortly.");
+    } else {
+      alert("❌ Order failed. Please try again.");
+      console.log(data);
+    }
   })
   .catch(err => {
     alert("❌ Order failed. Please try again.");
+    console.log(err);
   });
-}
-</script>
-  const phone = document.getElementById('phone').value;
-  if(phone.length < 9){
-    alert("Enter a valid phone number");
-    return;
-  }
-  alert(`Order placed!\n${bundle} on ${network}\nNumber: ${phone}`);
 }
 </script>
 
