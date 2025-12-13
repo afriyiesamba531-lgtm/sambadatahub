@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Confirm Purchase</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<div id="sidebar">
+  <a href="index.html" class="menu-item">🏠 Home</a>
+  <a href="data.html" class="menu-item">📡 Buy Data</a>
+</div>
+
+<div class="container">
+
+  <div class="card">
+    <h2>Confirm Purchase</h2>
+    <p id="details"></p>
+
+    <input id="phone" type="tel" placeholder="Enter phone number" style="width:100%;padding:12px;border-radius:12px;border:none;margin-top:12px;">
+
+    <button onclick="confirmOrder()" style="
+      margin-top:14px;
+      width:100%;
+      padding:12px;
+      border-radius:14px;
+      border:none;
+      background:#00eaff;
+      font-weight:bold;
+      cursor:pointer;
+    ">Confirm Purchase</button>
+  </div>
+
+</div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const network = params.get('network');
+const bundle = params.get('bundle');
+const price = params.get('price');
+
+document.getElementById('details').innerHTML =
+  `<strong>Network:</strong> ${network}<br>
+   <strong>Bundle:</strong> ${bundle}<br>
+   <strong>Price:</strong> GHS ${price}`;
+
+function confirmOrder(){
+  const phone = document.getElementById('phone').value;
+  if(phone.length < 9){
+    alert("Enter a valid phone number");
+    return;
+  }
+  alert(`Order placed!\n${bundle} on ${network}\nNumber: ${phone}`);
+}
+</script>
+
+</body>
+</html>
