@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buy Data - Samba531 Data</title>
+<style>
+body{margin:0;font-family:Arial;background:#f4f4f4;color:#333;}
+header{background:#0073e6;color:white;padding:20px;text-align:center;}
+header h1{margin:0;font-size:26px;}
+nav{display:flex;justify-content:center;gap:15px;background:#0056b3;padding:10px;}
+nav a{color:white;text-decoration:none;font-weight:bold;}
+.container{max-width:500px;margin:20px auto;}
+.card{background:white;border-radius:10px;padding:15px;margin-bottom:15px;box-shadow:0 2px 6px rgba(0,0,0,0.2);}
+.card h2{margin:5px 0;color:#0073e6;}
+.network-btn{padding:10px 15px;margin:5px 0;border:none;border-radius:5px;font-weight:bold;cursor:pointer;width:90%;font-size:16px;}
+.mtn{background:#ffc107;color:#000;}
+.airteltigo{background:#0dcaf0;color:#fff;}
+.telecel{background:#dc3545;color:#fff;}
+#phonePrompt{display:none;margin-top:10px;}
+#phonePrompt input, #phonePrompt button{width:90%;padding:10px;margin:5px 0;border-radius:6px;border:none;font-size:16px;}
+#sendBundle{background:#198754;color:white;}
+</style>
+</head>
+<body>
+<header>
+<h1>Buy Data</h1>
+</header>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="data.html">Buy Data</a>
+  <a href="wallet.html">Wallet</a>
+  <a href="transactions.html">Transactions</a>
+  <a href="profile.html">Profile</a>
+</nav>
+
+<div class="container">
+  <div class="card" data-bundle="1GB">
+    <h2>1GB – GHS 6</h2>
+    <button class="network-btn mtn">MTN</button>
+    <button class="network-btn airteltigo">AirtelTigo</button>
+    <button class="network-btn telecel">Telecel</button>
+  </div>
+  <div class="card" data-bundle="2GB">
+    <h2>2GB – GHS 12</h2>
+    <button class="network-btn mtn">MTN</button>
+    <button class="network-btn airteltigo">AirtelTigo</button>
+    <button class="network-btn telecel">Telecel</button>
+  </div>
+
+  <!-- Phone input after purchase -->
+  <div id="phonePrompt">
+    <input type="text" id="receiverNumber" placeholder="Enter recipient number">
+    <button id="sendBundle">Send Bundle</button>
+  </div>
+</div>
+
+<!-- WhatsApp Button -->
+<a href="https://chat.whatsapp.com/K0S5SJMX1scI6MVZ6LAw3p" target="_blank" id="whatsappBtn">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
+</a>
+
+<script>
+const bundlePrices = { "1GB":6, "2GB":12 };
+let selectedBundle = '';
+let selectedNetwork = '';
+let price = 0;
+
+function showPhonePrompt(bundle, network, priceValue){
+  selectedBundle = bundle;
+  selectedNetwork = network;
+  price = priceValue;
+  document.getElementById('phonePrompt').style.display = 'block';
+}
+
+document.querySelectorAll('.network-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const card = btn.closest('.card');
+    const bundle = card.getAttribute('data-bundle');
+    const network = btn.textContent;
+    const priceValue = bundlePrices[bundle];
+    showPhonePrompt(bundle, network, priceValue);
+  });
+});
+
+document.getElementById('sendBundle').addEventListener('click', ()=>{
+  const number = document.getElementById('receiverNumber').value;
+  if(!number){ alert('Enter recipient number'); return; }
+  // Send order to backend
+  fetch("https://YOUR_BACKEND_URL/order",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({ network:selectedNetwork, bundle:selectedBundle, price:price, phone:number })
+  })
+  .then(r=>r.json())
+  .then(d=>{
+    if(d.success){
+      alert('Bundle sent successfully!');
+      document.getElementById('phonePrompt').style.display='none';
+      document.getElementById('receiverNumber').value='';
+    } else alert('Order failed!');
+  });
+});
+</script>
+</body>
+</html>
