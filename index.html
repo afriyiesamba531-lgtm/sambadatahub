@@ -1,106 +1,41 @@
-<nav>
-  <a href="index.html">Home</a>
-  <a href="data.html">Buy Data</a>
-  <a href="wallet.html">Wallet</a>
-  <a href="transactions.html">Transactions</a>
-  <a href="profile.html">Profile</a>
-</nav>
-<a href="https://chat.whatsapp.com/K0S5SJMX1scI6MVZ6LAw3p" target="_blank" id="whatsappBtn">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
-</a>
-
-<style>
-#whatsappBtn{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  width:60px;
-  height:60px;
-  border-radius:50%;
-  background:white;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  z-index:1000;
-  box-shadow:0 2px 6px rgba(0,0,0,0.3);
-  transition: transform 0.2s;
-}
-#whatsappBtn img{
-  width:35px;
-  height:35px;
-}
-#whatsappBtn:hover{transform:scale(1.1);}
-  </style>
-  <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard - Samba531 Data</title>
-<style>
-body{margin:0;font-family:Arial;background:#f4f4f4;color:#333;}
-header{background:#0073e6;color:white;padding:20px;text-align:center;}
-header h1{margin:0;font-size:26px;}
-.dashboard{display:flex;flex-wrap:wrap;gap:10px;max-width:500px;margin:20px auto;}
-.card{background:white;border-radius:10px;padding:15px;flex:1 1 45%;box-shadow:0 2px 6px rgba(0,0,0,0.2);text-align:center;}
-.card h3{margin:5px 0;}
-.card h2{margin:0;color:#0073e6;}
-</style>
-</head>
-<body>
-<header>
-<h1>Samba531 Data</h1>
-<p>Instant Data Delivery</p>
-</header>
-
-<!-- Navigation -->
-<nav>
-  <a href="index.html">Home</a>
-  <a href="data.html">Buy Data</a>
-  <a href="wallet.html">Wallet</a>
-  <a href="transactions.html">Transactions</a>
-  <a href="profile.html">Profile</a>
-</nav>
-
-<div class="dashboard">
-  <div class="card">
-    <h3>Wallet Balance</h3>
-    <h2 id="balance">GHS 0</h2>
-  </div>
-  <div class="card">
-    <h3>Total Spent</h3>
-    <h2 id="totalSpent">GHS 0</h2>
-  </div>
-  <div class="card">
-    <h3>Orders Made</h3>
-    <h2 id="ordersCount">0</h2>
-  </div>
-  <div class="card">
-    <h3>Last Order</h3>
-    <h2 id="lastOrder">None</h2>
-  </div>
+<!-- Floating Sidebar -->
+<div id="sidebar">
+  <a href="index.html" class="menu-item">🏠 Home</a>
+  <a href="data.html" class="menu-item">📡 Buy Data</a>
+  <a href="wallet.html" class="menu-item">💰 Wallet</a>
+  <a href="transactions.html" class="menu-item">📄 Transactions</a>
+  <a href="profile.html" class="menu-item">👤 Profile</a>
 </div>
 
-<!-- WhatsApp Button -->
-<a href="https://chat.whatsapp.com/K0S5SJMX1scI6MVZ6LAw3p" target="_blank" id="whatsappBtn">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
-</a>
-
-<script>
-let balance = 0;
-let totalSpent = 0;
-let ordersCount = 0;
-let lastOrder = "None";
-
-function updateDashboard(){
-  document.getElementById("balance").innerText = "GHS " + balance;
-  document.getElementById("totalSpent").innerText = "GHS " + totalSpent;
-  document.getElementById("ordersCount").innerText = ordersCount;
-  document.getElementById("lastOrder").innerText = lastOrder;
+<style>
+#sidebar{
+  position:fixed;
+  top:50%;
+  left:0;
+  transform:translateY(-50%);
+  background:linear-gradient(180deg,#0073e6,#00bfff);
+  padding:10px;
+  border-top-right-radius:15px;
+  border-bottom-right-radius:15px;
+  box-shadow:2px 2px 10px rgba(0,0,0,0.3);
+  z-index:1000;
 }
-
-// Example: fetch data from backend
-updateDashboard();
-</script>
-</body>
-</html>
+.menu-item{
+  display:block;
+  padding:15px 20px;
+  margin:10px 0;
+  color:white;
+  text-decoration:none;
+  font-weight:bold;
+  font-size:16px;
+  border-radius:10px;
+  text-align:center;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+.menu-item:hover{
+  transform:scale(1.1);
+  background:rgba(255,255,255,0.2);
+  box-shadow:0 4px 12px rgba(0,0,0,0.3);
+}
+</style>
