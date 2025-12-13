@@ -47,7 +47,49 @@ document.getElementById('details').innerHTML =
    <strong>Bundle:</strong> ${bundle}<br>
    <strong>Price:</strong> GHS ${price}`;
 
+<script>
+const params = new URLSearchParams(window.location.search);
+const network = params.get('network');
+const bundle = params.get('bundle');
+const price = params.get('price');
+
+document.getElementById('details').innerHTML =
+  `<strong>Network:</strong> ${network}<br>
+   <strong>Bundle:</strong> ${bundle}<br>
+   <strong>Price:</strong> GHS ${price}`;
+
 function confirmOrder(){
+  const phone = document.getElementById('phone').value;
+
+  if(phone.length < 9){
+    alert("Enter a valid phone number");
+    return;
+  }
+
+  const orderData = {
+    api_key: "s5HX8RmBLOe2WpmQdu0WAYS9z302",
+    network: network,
+    bundle: bundle,
+    price: price,
+    phone: phone
+  };
+
+  fetch("https://YOUR-BACKEND-URL/send-order", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(orderData)
+  })
+  .then(res => res.json())
+  .then(data => {
+    alert("✅ Order submitted successfully! Data will be delivered shortly.");
+  })
+  .catch(err => {
+    alert("❌ Order failed. Please try again.");
+  });
+}
+</script>
   const phone = document.getElementById('phone').value;
   if(phone.length < 9){
     alert("Enter a valid phone number");
