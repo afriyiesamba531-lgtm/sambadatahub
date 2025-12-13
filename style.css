@@ -15,9 +15,9 @@ body{
 /* ===== FLOATING SIDEBAR ===== */
 #sidebar{
   position:fixed;
-  top:50%;
+  top:80px;   /* moves it upward */
   left:12px;
-  transform:translateY(-50%);
+  transform:none;
   background:rgba(5,15,35,0.95);
   padding:6px;
   border-radius:18px;
