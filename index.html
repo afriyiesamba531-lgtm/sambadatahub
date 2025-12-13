@@ -1,142 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Samba 531 Cheap Data Services</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: #f4f6f8;
-      color: #333;
-    }
-    header {
-      background: #0d6efd;
-      color: white;
-      padding: 30px 20px;
-      text-align: center;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 28px;
-    }
-    header p {
-      margin-top: 10px;
-      font-size: 16px;
-    }
-    section {
-      padding: 30px 20px;
-      max-width: 900px;
-      margin: auto;
-    }
-    h2 {
-      color: #0d6efd;
-      margin-bottom: 15px;
-    }
-    .services {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 15px;
-    }
-    .card {
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.08);
-      text-align: center;
-    }
-    .card h3 {
-      margin-top: 0;
-      color: #198754;
-    }
-    .networks {
-      margin-top: 10px;
-      font-weight: bold;
-    }
-    .contact {
-      background: #ffffff;
-      border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.08);
-    }
-    .contact p {
-      margin: 8px 0;
-    }
-    .whatsapp {
-      display: inline-block;
-      margin-top: 15px;
-      background: #25d366;
-      color: white;
-      padding: 12px 20px;
-      text-decoration: none;
-      border-radius: 30px;
-      font-weight: bold;
-    }
-    footer {
-      text-align: center;
-      padding: 15px;
-      background: #0d6efd;
-      color: white;
-      font-size: 14px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samba531 Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0073e6;
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            padding: 20px;
+        }
+        h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+        .container {
+            max-width: 400px;
+            margin: 20px auto;
+            background-color: #005bb5;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        select, button {
+            padding: 10px;
+            margin: 10px 0;
+            width: 80%;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+        .whatsapp { background-color: #25D366; color: white; }
+        .paystack { background-color: #00b894; color: white; }
+        .price-display {
+            font-size: 20px;
+            margin: 10px 0;
+        }
+        footer {
+            margin-top: 30px;
+            padding: 15px;
+            font-size: 14px;
+        }
+    </style>
 </head>
 <body>
+    <header>
+        <h1>Samba531 Data</h1>
+        <p>Buy your mobile data instantly!</p>
+    </header>
 
-  <header>
-    <h1>Samba 531 Cheap Data Services</h1>
-    <p>Affordable • Fast • Reliable Data Bundles</p>
-  </header>
+    <div class="container">
+        <label for="network">Select Network:</label>
+        <select id="network">
+            <option value="MTN">MTN</option>
+            <option value="AirtelTigo">AirtelTigo</option>
+            <option value="Telecel">Telecel</option>
+        </select>
 
-  <section>
-    <h2>Our Data Packages</h2>
-    <div class="services">
-      <div class="card"><h3>1GB</h3><p>₵6</p></div>
-      <div class="card"><h3>2GB</h3><p>₵12</p></div>
-      <div class="card"><h3>3GB</h3><p>₵17</p></div>
-      <div class="card"><h3>4GB</h3><p>₵22</p></div>
-      <div class="card"><h3>5GB</h3><p>₵29</p></div>
+        <label for="bundle">Select Data Bundle:</label>
+        <select id="bundle">
+            <option value="1GB">1GB - GHS 6</option>
+            <option value="2GB">2GB - GHS 12</option>
+            <option value="3GB">3GB - GHS 17</option>
+            <option value="4GB">4GB - GHS 22</option>
+            <option value="5GB">5GB - GHS 29</option>
+        </select>
+
+        <div class="price-display" id="price">Price: GHS 6</div>
+
+        <button class="whatsapp" id="whatsappBtn">Order via WhatsApp</button>
+        <button class="paystack" id="paystackBtn">Pay Now</button>
     </div>
-    <p class="networks">Available on: MTN • AirtelTigo • Telecel</p>
-    <p><strong>Note:</strong> Non-expiry data</p>
-  </section>
-<h2>Order Your Data</h2>
 
-<!-- MTN Button -->
-<a 5GB="https://wa.me/233531766320?text=I%20want%20to%20buy%202GB%20MTN%20data" target="_blank">
-  <button style="background-color:#FFCC00; color:black; padding:10px 20px; border:none; border-radius:5px; margin:5px;">
-    Buy MTN 2GB
-  </button>
-</a>
+    <footer>
+        &copy; 2025 Samba531 Data | Contact: 0531766320
+    </footer>
 
-<!-- AirtelTigo Button -->
-<a 3GB="https://wa.me/233531766320?text=I%20want%20to%20buy%202GB%20AirtelTigo%20data" target="_blank">
-  <button style="background-color:#0080FF; color:white; padding:10px 20px; border:none; border-radius:5px; margin:5px;">
-    Buy AirtelTigo 2GB
-  </button>
-</a>
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+    <script>
+        const bundleSelect = document.getElementById('bundle');
+        const priceDisplay = document.getElementById('price');
+        const whatsappBtn = document.getElementById('whatsappBtn');
+        const paystackBtn = document.getElementById('paystackBtn');
 
-<!-- Telecel Button -->
-<a 1GB="https://wa.me/233531766320?text=I%20want%20to%20buy%202GB%20Telecel%20data" target="_blank">
-  <button style="background-color:#FF0000; color:white; padding:10px 20px; border:none; border-radius:5px; margin:5px;">
-    Buy Telecel 2GB
-  </button>
-</a>
-<section>
-    <h2>Contact Us</h2>
-    <div class="contact">
-      <p><strong>Phone / WhatsApp:</strong> 0531766320</p>
-      <p><strong>Email:</strong> afriyiesamba531@gmail.com</p>
-      <p><strong>Working Time:</strong> Mon – Sunday | 8:00am – 7:30pm</p>
+        const bundlePrices = {
+            "1GB": 6,
+            "2GB": 12,
+            "3GB": 17,
+            "4GB": 22,
+            "5GB": 29
+        };
 
-      <a class="whatsapp" href="https://wa.me/233531766320">
-        Chat on WhatsApp
-      </a>
-    </div>
-  </section>
+        // Update price when bundle changes
+        bundleSelect.addEventListener('change', () => {
+            const selectedBundle = bundleSelect.value;
+            priceDisplay.textContent = `Price: GHS ${bundlePrices[selectedBundle]}`;
+        });
 
-  <footer>
-    © 2025 Samba 531 Cheap Data Services
-  </footer>
+        // WhatsApp order button
+        whatsappBtn.addEventListener('click', () => {
+            const network = document.getElementById('network').value;
+            const bundle = bundleSelect.value;
+            const message = `I want to buy ${bundle} ${network} data`;
+            const url = `https://wa.me/233531766320?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        });
 
+        // Paystack payment button
+        paystackBtn.addEventListener('click', () => {
+            const selectedBundle = bundleSelect.value;
+            const amount = bundlePrices[selectedBundle] * 100; // Convert GHS to pesewas
+            var handler = PaystackPop.setup({
+                key: 'pk_test_36e29f5351329fb6632114ba263089ecb14608f0', // Your test key
+                email: 'customer@example.com',
+                amount: amount,
+                currency: 'GHS',
+                callback: function(response){
+                    alert('Payment successful. Reference: ' + response.reference);
+                },
+                onClose: function(){
+                    alert('Transaction was not completed.');
+                }
+            });
+            handler.openIframe();
+        });
+    </script>
+</body>
+</html>
