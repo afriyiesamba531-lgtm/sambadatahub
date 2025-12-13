@@ -196,6 +196,49 @@ document.querySelectorAll('.buyBtn').forEach(btn=>{
     });
 });
 </script>
+    <script>
+// Bundle prices
+const bundlePrices = { "1GB":6, "2GB":12, "3GB":17, "4GB":22, "5GB":29 };
+
+// Handle bundle purchase
+document.querySelectorAll('.buyBtn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+        const card = btn.closest('.card');
+        const bundle = card.getAttribute('data-bundle');
+        const network = btn.textContent.includes('MTN')?'MTN':
+                        btn.textContent.includes('AirtelTigo')?'AirtelTigo':'Telecel';
+        const price = bundlePrices[bundle];
+
+        if(walletBalance < price){ alert(`Insufficient wallet. Please top up GHS ${price-walletBalance}`); return; }
+
+        // Deduct wallet
+        walletBalance -= price;
+        updateWallet(walletBalance);
+
+        // Send order to API
+        fetch("https://s5HX8RmBLOe2WpmQdu0WAYS9z302", {
+            method:"POST",
+            headers:{ "Content-Type":"application/json" },
+            body: JSON.stringify({ network, bundle, phone: '233531766320' }) // Your number
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            if(data.success){
+                alert(`Order successful! Ref: ${data.reference}`);
+                transactions.push({ type:'Purchase', details:`${bundle} ${network}`, amount:price, date:new Date().toLocaleString() });
+                updateHistory(transactions);
+            } else {
+                alert(`Order failed: ${data.message}`);
+                walletBalance += price; updateWallet(walletBalance); // refund
+            }
+        })
+        .catch(err=>{
+            alert(`Error: ${err}`);
+            walletBalance += price; updateWallet(walletBalance); // refund
+        });
+    });
+});
+    </script>
 
 </body>
     </html>
