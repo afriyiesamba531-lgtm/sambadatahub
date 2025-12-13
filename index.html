@@ -242,3 +242,203 @@ document.querySelectorAll('.buyBtn').forEach(btn=>{
 
 </body>
     </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Samba531 Data</title>
+<style>
+body { font-family: Arial, sans-serif; background:#0073e6; color:white; margin:0; padding:0; text-align:center; }
+header { padding:20px; }
+h1 { margin:0; font-size:28px; }
+.container { max-width:500px; margin:20px auto; }
+.wallet-section { background:#005bb5; padding:15px; border-radius:10px; margin-bottom:15px; }
+.wallet-section input, .wallet-section button { padding:10px; margin:5px 0; width:90%; font-size:16px; border-radius:5px; border:none; cursor:pointer; }
+.wallet { background:#ff8c00; color:white; }
+.balance { font-size:18px; margin:10px 0; }
+.cards { display:flex; flex-direction:column; gap:15px; }
+.card { background:#005bb5; padding:15px; border-radius:10px; text-align:center; }
+.card h2 { margin:0; font-size:22px; }
+.card p { margin:5px 0; font-size:18px; }
+.network-btn { padding:10px 15px; margin:5px; border:none; border-radius:5px; color:white; cursor:pointer; font-weight:bold; }
+.mtn { background:#FFCC00; color:black; }
+.airteltigo { background:#0080FF; color:white; }
+.telecel { background:#FF0000; color:white; }
+.history-section { background:#005bb5; padding:15px; border-radius:10px; margin-top:20px; text-align:left; }
+.history-section h3 { margin-top:0; }
+.transaction { border-bottom:1px solid #fff; padding:5px 0; }
+footer { margin-top:30px; padding:15px; font-size:14px; }
+@media (max-width:600px){ .wallet-section input, .wallet-section button { width:95%; } }
+</style>
+</head>
+<body>
+
+<header>
+<h1>Samba531 Data</h1>
+<p>Buy your mobile data instantly!</p>
+</header>
+
+<div class="container">
+
+<div class="wallet-section">
+<div class="balance" id="walletBalance">Wallet Balance: GHS 0</div>
+<input type="number" id="topupAmount" placeholder="Enter amount to top up">
+<button class="wallet" id="topupBtn">Top Up Wallet</button>
+</div>
+
+<div class="cards">
+
+<div class="card" data-bundle="1GB">
+<h2>1GB</h2>
+<p>Price: GHS 6</p>
+<button class="network-btn buyBtn mtn">MTN</button>
+<button class="network-btn buyBtn airteltigo">AirtelTigo</button>
+<button class="network-btn buyBtn telecel">Telecel</button>
+</div>
+
+<div class="card" data-bundle="2GB">
+<h2>2GB</h2>
+<p>Price: GHS 12</p>
+<button class="network-btn buyBtn mtn">MTN</button>
+<button class="network-btn buyBtn airteltigo">AirtelTigo</button>
+<button class="network-btn buyBtn telecel">Telecel</button>
+</div>
+
+<div class="card" data-bundle="3GB">
+<h2>3GB</h2>
+<p>Price: GHS 17</p>
+<button class="network-btn buyBtn mtn">MTN</button>
+<button class="network-btn buyBtn airteltigo">AirtelTigo</button>
+<button class="network-btn buyBtn telecel">Telecel</button>
+</div>
+
+<div class="card" data-bundle="4GB">
+<h2>4GB</h2>
+<p>Price: GHS 22</p>
+<button class="network-btn buyBtn mtn">MTN</button>
+<button class="network-btn buyBtn airteltigo">AirtelTigo</button>
+<button class="network-btn buyBtn telecel">Telecel</button>
+</div>
+
+<div class="card" data-bundle="5GB">
+<h2>5GB</h2>
+<p>Price: GHS 29</p>
+<button class="network-btn buyBtn mtn">MTN</button>
+<button class="network-btn buyBtn airteltigo">AirtelTigo</button>
+<button class="network-btn buyBtn telecel">Telecel</button>
+</div>
+
+</div>
+
+<!-- Transaction History -->
+<div class="history-section" id="historySection">
+<h3>Transaction History</h3>
+<div id="historyList">No transactions yet.</div>
+</div>
+
+</div>
+
+<footer>
+&copy; 2025 Samba531 Data | Contact: 0531766320
+</footer>
+
+<script src="https://js.paystack.co/v1/inline.js"></script>
+<script>
+// Wallet & transaction system
+let walletBalance = 0;
+let transactions = [];
+
+// Update wallet display
+function updateWallet(amount){ 
+    walletBalance = amount; 
+    document.getElementById('walletBalance').textContent = `Wallet Balance: GHS ${walletBalance}`;
+}
+
+// Update transaction history
+function updateHistory(list){
+    transactions = list || transactions;
+    const container = document.getElementById('historyList');
+    if(transactions.length===0){ container.innerHTML='No transactions yet.'; return; }
+    container.innerHTML='';
+    transactions.slice().reverse().forEach(tr=>{
+        const div = document.createElement('div');
+        div.className='transaction';
+        div.textContent=`[${tr.date}] ${tr.type} - ${tr.details} - GHS ${tr.amount}`;
+        container.appendChild(div);
+    });
+}
+
+// Bundle prices
+const bundlePrices = { "1GB":6, "2GB":12, "3GB":17, "4GB":22, "5GB":29 };
+
+// Top up wallet via Paystack
+document.getElementById('topupBtn').addEventListener('click',()=>{
+    const amount = parseFloat(document.getElementById('topupAmount').value);
+    if(isNaN(amount)||amount<=0){ alert('Enter a valid amount'); return; }
+
+    var handler = PaystackPop.setup({
+        key:'pk_live_YOUR_LIVE_PUBLIC_KEY', // replace with your live public key
+        email:'customer@example.com',
+        amount:amount*100,
+        currency:'GHS',
+        callback:function(response){
+            fetch('https://yourdomain.com/verify-payment', {
+                method:'POST',
+                headers:{'Content-Type':'application/json'},
+                body: JSON.stringify({reference:response.reference, amount: amount})
+            })
+            .then(res=>res.json())
+            .then(data=>{
+                if(data.success){
+                    updateWallet(data.newBalance);
+                    updateHistory(data.transactions);
+                    alert('Wallet topped up successfully!');
+                } else alert('Payment verification failed.');
+            });
+            document.getElementById('topupAmount').value='';
+        },
+        onClose:function(){ alert('Payment cancelled'); }
+    });
+    handler.openIframe();
+});
+
+// Handle bundle purchase
+document.querySelectorAll('.buyBtn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+        const card = btn.closest('.card');
+        const bundle = card.getAttribute('data-bundle');
+        const network = btn.textContent.includes('MTN')?'MTN':
+                        btn.textContent.includes('AirtelTigo')?'AirtelTigo':'Telecel';
+        const price = bundlePrices[bundle];
+
+        if(walletBalance < price){ alert(`Insufficient wallet. Please top up GHS ${price-walletBalance}`); return; }
+
+        walletBalance -= price;
+        updateWallet(walletBalance);
+
+        fetch("https://s5HX8RmBLOe2WpmQdu0WAYS9z302", {
+            method:"POST",
+            headers:{ "Content-Type":"application/json" },
+            body: JSON.stringify({ network, bundle, phone: '233531766320' })
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            if(data.success){
+                alert(`Order successful! Ref: ${data.reference}`);
+                transactions.push({ type:'Purchase', details:`${bundle} ${network}`, amount:price, date:new Date().toLocaleString() });
+                updateHistory(transactions);
+            } else {
+                alert(`Order failed: ${data.message}`);
+                walletBalance += price; updateWallet(walletBalance);
+            }
+        })
+        .catch(err=>{
+            alert(`Error: ${err}`);
+            walletBalance += price; updateWallet(walletBalance);
+        });
+    });
+});
+</script>
+</body>
+</html>
