@@ -25,11 +25,12 @@ input{ padding:12px; width:80%; max-width:250px; border-radius:12px; border:2px 
 <h2>Top Up Wallet</h2>
 <input type="number" id="topupAmount" placeholder="Enter amount in Cedis">
 <br>
-<button class="btn" onclick="topUp()">Top Up</button>
+<button class="btn" onclick="payWithPaystack()">Top Up</button>
 
 <br><br>
 <a href="index.html" class="btn">Back to Home</a>
 
+<script src="https://js.paystack.co/v1/inline.js"></script>
 <script>
 let balance = 0;
 
@@ -37,19 +38,34 @@ function updateBalance(){
   document.getElementById("balance").innerText = "GHS " + balance.toFixed(2);
 }
 
-function topUp(){
+// === PAYSTACK WALLET TOP-UP ===
+function payWithPaystack(){
   let amount = parseFloat(document.getElementById("topupAmount").value);
   if(isNaN(amount) || amount <= 0){
     alert("Please enter a valid amount.");
     return;
   }
 
-  // Here you can integrate Paystack to pay the amount
-  // For now, we just simulate top-up
-  balance += amount;
-  updateBalance();
-  alert("🎉 Wallet topped up successfully! Current Balance: GHS " + balance.toFixed(2));
-  document.getElementById("topupAmount").value = "";
+  let amountKobo = amount * 100; // Convert Cedis to kobo
+  var handler = PaystackPop.setup({
+    key: 'pk_test_36e29f5351329fb6632114ba263089ecb14608f0', // your Paystack public key
+    email: 'customer@example.com', // optional, can be dynamic
+    amount: amountKobo,
+    currency: 'GHS',
+    ref: ''+Math.floor((Math.random() * 1000000000) + 1),
+    callback: function(response){
+      console.log('Payment successful. Reference:', response.reference);
+      // Increase wallet balance after successful payment
+      balance += amount;
+      updateBalance();
+      alert("🎉 Wallet topped up successfully! Current Balance: GHS " + balance.toFixed(2));
+      document.getElementById("topupAmount").value = "";
+    },
+    onClose: function(){
+      alert('Transaction was not completed, window closed.');
+    }
+  });
+  handler.openIframe();
 }
 
 // Initialize
