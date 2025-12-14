@@ -12,7 +12,7 @@
 }
 
 body{
-  background:linear-gradient(135deg,#e6f7ff,#ffffff);
+  background: linear-gradient(135deg,#e6f7ff,#ffffff);
   margin:0;
   padding:20px;
   text-align:center;
@@ -25,7 +25,7 @@ h2{
 
 /* BUTTONS */
 .btn{
-  padding:15px 18px;
+  padding:15px 20px;
   margin:10px;
   border:none;
   border-radius:16px;
@@ -36,30 +36,13 @@ h2{
   color:white;
   box-shadow:0 4px 12px rgba(0,0,0,0.2);
   transition:0.3s;
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
 }
 
 .btn:hover{
   transform:scale(1.05);
 }
 
-/* NETWORK COLORS */
-.mtn{ background:#ffcc00; color:#000; }
-.airtel{ background:#e60000; }
-.telecel{ background:#cc0000; }
-
-/* LOGOS – Official PNG */
-.logo{
-  width:36px;
-  height:auto;
-  background:white;
-  padding:6px;
-  border-radius:8px;
-}
-
-/* PRICE BUTTONS – classy style */
+/* PRICE BUTTONS – classy, two rows */
 .price-btn{
   background:#ffffff;
   color:#003366;
@@ -72,6 +55,8 @@ h2{
   font-size:18px;
   cursor:pointer;
   transition:0.3s;
+  display:inline-block;
+  width:120px;
 }
 
 .price-btn:hover{
@@ -111,6 +96,7 @@ input{
 
 #popup h2{
   color:#00aa00;
+  font-size:24px;
 }
 
 /* Floating WhatsApp icon */
@@ -139,32 +125,33 @@ input{
 #whatsapp:hover{
   transform:scale(1.1);
 }
+
+/* Interactive text */
+#interactive{
+  font-size:18px;
+  margin:20px 0;
+  color:#ff6600;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+#interactive:hover{
+  color:#ff3300;
+  transform:scale(1.05);
+}
 </style>
 </head>
 
 <body>
 
-<h2>Select Network</h2>
+<h2>Welcome! 😄 Ready to buy your data?</h2>
+<p id="interactive" onclick="funText()">Click me for a surprise message!</p>
 
 <!-- NETWORK SELECTION -->
 <div id="networks">
-  <button class="btn mtn" onclick="showPrices('mtn')">
-    <img class="logo" 
-      src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/MTN_Group_logo.svg/256px-MTN_Group_logo.svg.png">
-    MTN
-  </button>
-
-  <button class="btn airtel" onclick="showPrices('airtel')">
-    <img class="logo" 
-      src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Airtel_logo.svg/256px-Airtel_logo.svg.png">
-    AirtelTigo
-  </button>
-
-  <button class="btn telecel" onclick="showPrices('telecel')">
-    <img class="logo" 
-      src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Vodafone_logo_2017.svg/256px-Vodafone_logo_2017.svg.png">
-    Telecel
-  </button>
+  <button class="btn" onclick="showPrices('mtn')">MTN</button>
+  <button class="btn" onclick="showPrices('airtel')">AirtelTigo</button>
+  <button class="btn" onclick="showPrices('telecel')">Telecel</button>
 </div>
 
 <!-- PRICE SECTION -->
@@ -222,13 +209,19 @@ function showPrices(network){
   document.getElementById("priceTitle").innerText =
     network.toUpperCase()+" Prices";
 
+  let row = document.createElement("div");
+  row.style.display="flex";
+  row.style.flexWrap="wrap";
+  row.style.justifyContent="center";
+
   prices[network].forEach(p=>{
     let btn=document.createElement("button");
     btn.className="price-btn";
     btn.innerText=p;
     btn.onclick=()=>showNumber();
-    document.getElementById("priceButtons").appendChild(btn);
+    row.appendChild(btn);
   });
+  document.getElementById("priceButtons").appendChild(row);
 }
 
 function showNumber(){
@@ -247,6 +240,20 @@ function placeOrder(){
 function closePopup(){
   document.getElementById("popup").style.display="none";
   location.reload();
+}
+
+// Interactive text messages
+let messages = [
+  "🎉 Buying data has never been this easy! 😎",
+  "⚡ Fast, simple, and fun! Get your data now! 📱",
+  "💡 Tip: Always check your balance after purchase! 🤑",
+  "🔥 Network deals you don’t want to miss! 😁",
+  "🚀 Your data journey starts here! 🌟"
+];
+
+function funText(){
+  let randomIndex = Math.floor(Math.random() * messages.length);
+  document.getElementById("interactive").innerText = messages[randomIndex];
 }
 </script>
 
