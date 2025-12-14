@@ -8,7 +8,7 @@
 <style>
 *{
   box-sizing:border-box;
-  font-family: Arial, sans-serif;
+  font-family: 'Poppins', Arial, sans-serif;
 }
 
 body{
@@ -50,13 +50,33 @@ h2{
 .airtel{ background:#e60000; }
 .telecel{ background:#cc0000; }
 
-/* LOGOS – PNG (GUARANTEED) */
+/* LOGOS – Official PNG */
 .logo{
-  width:32px;
-  height:32px;
+  width:36px;
+  height:auto;
   background:white;
-  padding:4px;
-  border-radius:6px;
+  padding:6px;
+  border-radius:8px;
+}
+
+/* PRICE BUTTONS – classy style */
+.price-btn{
+  background:#ffffff;
+  color:#003366;
+  font-weight:600;
+  padding:12px 25px;
+  margin:8px;
+  border-radius:20px;
+  border:2px solid #005eff;
+  box-shadow:0 5px 15px rgba(0,0,0,0.15);
+  font-size:18px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.price-btn:hover{
+  background:#e6f7ff;
+  transform:scale(1.05);
 }
 
 /* SECTIONS */
@@ -92,6 +112,33 @@ input{
 #popup h2{
   color:#00aa00;
 }
+
+/* Floating WhatsApp icon */
+#whatsapp{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  width:60px;
+  height:60px;
+  background:#25D366;
+  border-radius:50%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  box-shadow:0 5px 15px rgba(0,0,0,0.3);
+  cursor:pointer;
+  z-index:1000;
+  transition:0.3s;
+}
+
+#whatsapp img{
+  width:35px;
+  height:35px;
+}
+
+#whatsapp:hover{
+  transform:scale(1.1);
+}
 </style>
 </head>
 
@@ -101,22 +148,23 @@ input{
 
 <!-- NETWORK SELECTION -->
 <div id="networks">
-
   <button class="btn mtn" onclick="showPrices('mtn')">
-    <img class="logo" src="https://i.imgur.com/2QwZK9F.png">
+    <img class="logo" 
+      src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/MTN_Group_logo.svg/256px-MTN_Group_logo.svg.png">
     MTN
   </button>
 
   <button class="btn airtel" onclick="showPrices('airtel')">
-    <img class="logo" src="https://i.imgur.com/2nCt3Sbl.png">
+    <img class="logo" 
+      src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Airtel_logo.svg/256px-Airtel_logo.svg.png">
     AirtelTigo
   </button>
 
   <button class="btn telecel" onclick="showPrices('telecel')">
-    <img class="logo" src="https://i.imgur.com/4M34hi2.png">
+    <img class="logo" 
+      src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Vodafone_logo_2017.svg/256px-Vodafone_logo_2017.svg.png">
     Telecel
   </button>
-
 </div>
 
 <!-- PRICE SECTION -->
@@ -139,6 +187,11 @@ input{
   <p>Your data bundle will be delivered within 5–30 minutes.</p>
   <button class="btn" onclick="closePopup()">OK</button>
 </div>
+
+<!-- WhatsApp Floating -->
+<a id="whatsapp" href="https://chat.whatsapp.com/K0S5SJMX1scI6MVZ6LAw3p" target="_blank">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg">
+</a>
 
 <script>
 let prices = {
@@ -171,7 +224,7 @@ function showPrices(network){
 
   prices[network].forEach(p=>{
     let btn=document.createElement("button");
-    btn.className="btn";
+    btn.className="price-btn";
     btn.innerText=p;
     btn.onclick=()=>showNumber();
     document.getElementById("priceButtons").appendChild(btn);
