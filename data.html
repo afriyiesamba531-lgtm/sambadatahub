@@ -4,210 +4,75 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Buy Data</title>
-
 <style>
-*{
-  box-sizing:border-box;
-  font-family: 'Poppins', Arial, sans-serif;
-}
-
-body{
-  background: linear-gradient(135deg,#e6f7ff,#ffffff);
-  margin:0;
-  padding:20px;
-  text-align:center;
-  color:#003366;
-}
-
-h2{
-  margin-bottom:20px;
-}
-
-/* BUTTONS */
-.btn{
-  padding:15px 20px;
-  margin:10px;
-  border:none;
-  border-radius:16px;
-  font-size:16px;
-  font-weight:bold;
-  cursor:pointer;
-  background:#005eff;
-  color:white;
-  box-shadow:0 4px 12px rgba(0,0,0,0.2);
-  transition:0.3s;
-}
-
-.btn:hover{
-  transform:scale(1.05);
-}
-
-/* PRICE BUTTONS – classy, two rows */
-.price-btn{
-  background:#ffffff;
-  color:#003366;
-  font-weight:600;
-  padding:12px 25px;
-  margin:8px;
-  border-radius:20px;
-  border:2px solid #005eff;
-  box-shadow:0 5px 15px rgba(0,0,0,0.15);
-  font-size:18px;
-  cursor:pointer;
-  transition:0.3s;
-  display:inline-block;
-  width:120px;
-}
-
-.price-btn:hover{
-  background:#e6f7ff;
-  transform:scale(1.05);
-}
-
-/* SECTIONS */
-.section{
-  display:none;
-  margin-top:30px;
-}
-
-/* INPUT */
-input{
-  padding:15px;
-  width:80%;
-  max-width:300px;
-  border-radius:12px;
-  border:2px solid #005eff;
-  font-size:16px;
-}
-
-/* POPUP */
-#popup{
-  position:fixed;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  background:white;
-  padding:30px;
-  border-radius:20px;
-  box-shadow:0 0 40px rgba(0,0,0,0.3);
-  display:none;
-  z-index:999;
-}
-
-#popup h2{
-  color:#00aa00;
-  font-size:24px;
-}
-
-/* Floating WhatsApp icon */
-#whatsapp{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  width:60px;
-  height:60px;
-  background:#25D366;
-  border-radius:50%;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  box-shadow:0 5px 15px rgba(0,0,0,0.3);
-  cursor:pointer;
-  z-index:1000;
-  transition:0.3s;
-}
-
-#whatsapp img{
-  width:35px;
-  height:35px;
-}
-
-#whatsapp:hover{
-  transform:scale(1.1);
-}
-
-/* Interactive text */
-#interactive{
-  font-size:18px;
-  margin:20px 0;
-  color:#ff6600;
-  cursor:pointer;
-  transition:0.3s;
-}
-
-#interactive:hover{
-  color:#ff3300;
-  transform:scale(1.05);
-}
+*{ box-sizing:border-box; font-family: 'Poppins', Arial, sans-serif;}
+body{ background: linear-gradient(135deg,#e6f7ff,#ffffff); margin:0; padding:20px; text-align:center; color:#003366;}
+h2{ margin-bottom:20px; }
+.btn{ padding:15px 20px; margin:10px; border:none; border-radius:16px; font-size:16px; font-weight:bold; cursor:pointer; background:#005eff; color:white; box-shadow:0 4px 12px rgba(0,0,0,0.2); transition:0.3s;}
+.btn:hover{ transform:scale(1.05);}
+.price-btn{ background:#ffffff; color:#003366; font-weight:600; padding:12px 25px; margin:8px; border-radius:20px; border:2px solid #005eff; box-shadow:0 5px 15px rgba(0,0,0,0.15); font-size:18px; cursor:pointer; transition:0.3s; display:inline-block; width:120px;}
+.price-btn:hover{ background:#e6f7ff; transform:scale(1.05);}
+.section{ display:none; margin-top:30px;}
+input{ padding:15px; width:80%; max-width:300px; border-radius:12px; border:2px solid #005eff; font-size:16px;}
+#popup{ position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:white; padding:30px; border-radius:20px; box-shadow:0 0 40px rgba(0,0,0,0.3); display:none; z-index:999;}
+#popup h2{ color:#00aa00; font-size:24px;}
+#whatsapp{ position:fixed; bottom:20px; right:20px; width:60px; height:60px; background:#25D366; border-radius:50%; display:flex; justify-content:center; align-items:center; box-shadow:0 5px 15px rgba(0,0,0,0.3); cursor:pointer; z-index:1000; transition:0.3s;}
+#whatsapp img{ width:35px; height:35px;}
+#whatsapp:hover{ transform:scale(1.1);}
+#interactive{ font-size:18px; margin:20px 0; color:#ff6600; cursor:pointer; transition:0.3s;}
+#interactive:hover{ color:#ff3300; transform:scale(1.05);}
 </style>
 </head>
-
 <body>
 
 <h2>Welcome! 😄 Ready to buy your data?</h2>
 <p id="interactive" onclick="funText()">Click me for a surprise message!</p>
 
-<!-- NETWORK SELECTION -->
 <div id="networks">
   <button class="btn" onclick="showPrices('mtn')">MTN</button>
   <button class="btn" onclick="showPrices('airtel')">AirtelTigo</button>
   <button class="btn" onclick="showPrices('telecel')">Telecel</button>
 </div>
 
-<!-- PRICE SECTION -->
 <div id="prices" class="section">
   <h2 id="priceTitle"></h2>
   <div id="priceButtons"></div>
 </div>
 
-<!-- PHONE NUMBER -->
 <div id="numberSection" class="section">
   <h2>Enter Phone Number</h2>
   <input type="tel" id="phone" placeholder="e.g. 054xxxxxxx">
   <br><br>
-  <button class="btn" onclick="placeOrder()">Confirm Purchase</button>
+  <button class="btn" onclick="payWithPaystack()">Pay & Confirm Purchase</button>
 </div>
 
-<!-- SUCCESS POPUP -->
 <div id="popup">
   <h2>😁 Order placed successfully 😁</h2>
   <p>Your data bundle will be delivered within 5–30 minutes.</p>
   <button class="btn" onclick="closePopup()">OK</button>
 </div>
 
-<!-- WhatsApp Floating -->
 <a id="whatsapp" href="https://chat.whatsapp.com/K0S5SJMX1scI6MVZ6LAw3p" target="_blank">
   <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg">
 </a>
 
+<script src="https://js.paystack.co/v1/inline.js"></script>
 <script>
 let prices = {
-  mtn:[
-    "1GB - 5 Cedis",
-    "2GB - 10 Cedis",
-    "3GB - 15 Cedis",
-    "4GB - 20 Cedis",
-    "5GB - 25 Cedis",
-    "6GB - 30 Cedis"
-  ],
-  airtel:[
-    "1GB - 4.90 Cedis",
-    "2GB - 9.80 Cedis",
-    "3GB - 14.70 Cedis"
-  ],
-  telecel:[
-    "5GB - 27 Cedis",
-    "10GB - 49 Cedis",
-    "15GB - 65 Cedis"
-  ]
+  mtn:["1GB - 5 Cedis","2GB - 10 Cedis","3GB - 15 Cedis","4GB - 20 Cedis","5GB - 25 Cedis","6GB - 30 Cedis"],
+  airtel:["1GB - 4.90 Cedis","2GB - 9.80 Cedis","3GB - 14.70 Cedis"],
+  telecel:["5GB - 27 Cedis","10GB - 49 Cedis","15GB - 65 Cedis"]
 };
 
+let selectedNetwork = "";
+let selectedPlan = "";
+
 function showPrices(network){
+  selectedNetwork = network;
   document.getElementById("prices").style.display="block";
   document.getElementById("numberSection").style.display="none";
   document.getElementById("priceButtons").innerHTML="";
-  document.getElementById("priceTitle").innerText =
-    network.toUpperCase()+" Prices";
+  document.getElementById("priceTitle").innerText = network.toUpperCase()+" Prices";
 
   let row = document.createElement("div");
   row.style.display="flex";
@@ -215,10 +80,13 @@ function showPrices(network){
   row.style.justifyContent="center";
 
   prices[network].forEach(p=>{
-    let btn=document.createElement("button");
+    let btn = document.createElement("button");
     btn.className="price-btn";
-    btn.innerText=p;
-    btn.onclick=()=>showNumber();
+    btn.innerText = p;
+    btn.onclick = ()=>{
+      selectedPlan = p;
+      showNumber();
+    };
     row.appendChild(btn);
   });
   document.getElementById("priceButtons").appendChild(row);
@@ -228,13 +96,57 @@ function showNumber(){
   document.getElementById("numberSection").style.display="block";
 }
 
-function placeOrder(){
-  let phone=document.getElementById("phone").value.trim();
+// === PAYSTACK INTEGRATION ===
+function payWithPaystack(){
+  let phone = document.getElementById("phone").value.trim();
   if(phone.length < 9){
     alert("Please enter a valid phone number");
     return;
   }
-  document.getElementById("popup").style.display="block";
+
+  // Convert plan price to kobo (for example "5 Cedis" => 500)
+  let amountStr = selectedPlan.split('-')[1].replace('Cedis','').trim();
+  let amountKobo = parseFloat(amountStr)*100; // Paystack uses kobo
+
+  var handler = PaystackPop.setup({
+    key: 'pk_test_36e29f5351329fb6632114ba263089ecb14608f0', // your public key
+    email: 'customer@example.com', // optional
+    amount: amountKobo,
+    currency: 'GHS',
+    ref: ''+Math.floor((Math.random() * 1000000000) + 1),
+    callback: function(response){
+      console.log('Payment success. Reference: ', response.reference);
+      sendOrderAPI(phone);
+    },
+    onClose: function(){
+      alert('Transaction was not completed, window closed.');
+    }
+  });
+  handler.openIframe();
+}
+
+// === SEND ORDER TO DATA API AFTER PAYMENT ===
+function sendOrderAPI(phone){
+  const apiURL = "https://s5HX8RmBLOe2WpmQdu0WAYS9z302"; // your data API
+  const orderData = { phone: phone, network: selectedNetwork, plan: selectedPlan };
+
+  fetch(apiURL, {
+    method:"POST",
+    headers: { "Content-Type":"application/json" },
+    body: JSON.stringify(orderData)
+  })
+  .then(res => res.json())
+  .then(data => {
+    if(data.success){
+      document.getElementById("popup").style.display="block";
+    } else {
+      alert("⚠️ Order failed after payment! Please contact support.");
+    }
+  })
+  .catch(err=>{
+    console.error("API error:", err);
+    alert("⚠️ Could not send order to API. Contact support.");
+  });
 }
 
 function closePopup(){
@@ -242,7 +154,6 @@ function closePopup(){
   location.reload();
 }
 
-// Interactive text messages
 let messages = [
   "🎉 Buying data has never been this easy! 😎",
   "⚡ Fast, simple, and fun! Get your data now! 📱",
@@ -252,10 +163,9 @@ let messages = [
 ];
 
 function funText(){
-  let randomIndex = Math.floor(Math.random() * messages.length);
+  let randomIndex = Math.floor(Math.random()*messages.length);
   document.getElementById("interactive").innerText = messages[randomIndex];
 }
 </script>
-
 </body>
 </html>
