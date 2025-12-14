@@ -8,7 +8,7 @@
 <style>
 *{
   box-sizing:border-box;
-  font-family:Poppins, sans-serif;
+  font-family: Arial, sans-serif;
 }
 
 body{
@@ -25,20 +25,19 @@ h2{
 
 /* BUTTONS */
 .btn{
-  padding:15px 20px;
+  padding:15px 18px;
   margin:10px;
   border:none;
-  border-radius:18px;
+  border-radius:16px;
   font-size:16px;
   font-weight:bold;
   cursor:pointer;
   background:#005eff;
   color:white;
-  box-shadow:0 0 15px rgba(0,0,0,0.2);
+  box-shadow:0 4px 12px rgba(0,0,0,0.2);
   transition:0.3s;
   display:inline-flex;
   align-items:center;
-  justify-content:center;
   gap:10px;
 }
 
@@ -47,14 +46,17 @@ h2{
 }
 
 /* NETWORK COLORS */
-.mtn{ background:#ffcc00; color:black; }
+.mtn{ background:#ffcc00; color:#000; }
 .airtel{ background:#e60000; }
 .telecel{ background:#cc0000; }
 
-/* LOGOS */
+/* LOGOS – PNG (GUARANTEED) */
 .logo{
-  width:30px;
-  height:30px;
+  width:32px;
+  height:32px;
+  background:white;
+  padding:4px;
+  border-radius:6px;
 }
 
 /* SECTIONS */
@@ -71,7 +73,6 @@ input{
   border-radius:12px;
   border:2px solid #005eff;
   font-size:16px;
-  outline:none;
 }
 
 /* POPUP */
@@ -82,7 +83,7 @@ input{
   transform:translate(-50%,-50%);
   background:white;
   padding:30px;
-  border-radius:25px;
+  border-radius:20px;
   box-shadow:0 0 40px rgba(0,0,0,0.3);
   display:none;
   z-index:999;
@@ -100,20 +101,22 @@ input{
 
 <!-- NETWORK SELECTION -->
 <div id="networks">
+
   <button class="btn mtn" onclick="showPrices('mtn')">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/MTN_Logo.svg" class="logo">
+    <img class="logo" src="https://i.imgur.com/2QwZK9F.png">
     MTN
   </button>
 
   <button class="btn airtel" onclick="showPrices('airtel')">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2d/Airtel_logo.svg" class="logo">
+    <img class="logo" src="https://i.imgur.com/2nCt3Sbl.png">
     AirtelTigo
   </button>
 
   <button class="btn telecel" onclick="showPrices('telecel')">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Vodafone_2017_logo.svg" class="logo">
+    <img class="logo" src="https://i.imgur.com/4M34hi2.png">
     Telecel
   </button>
+
 </div>
 
 <!-- PRICE SECTION -->
