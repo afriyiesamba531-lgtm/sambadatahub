@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Samba531 Data - Wallet</title>
+<style>
+*{ box-sizing:border-box; font-family: 'Poppins', Arial, sans-serif; margin:0; padding:0;}
+body{ background: linear-gradient(135deg,#e6f7ff,#ffffff); color:#003366; text-align:center; padding:20px;}
+h1,h2{ margin-bottom:15px; }
+.btn{ padding:15px 25px; margin:10px; border:none; border-radius:16px; font-size:16px; font-weight:bold; cursor:pointer; background:#005eff; color:white; box-shadow:0 4px 12px rgba(0,0,0,0.2); transition:0.3s;}
+.btn:hover{ transform:scale(1.05); }
+input{ padding:12px; width:80%; max-width:250px; border-radius:12px; border:2px solid #005eff; font-size:16px; margin-bottom:15px;}
+#balance{ font-size:24px; font-weight:bold; margin:20px 0; color:#ff6600;}
+</style>
+</head>
+<body>
+
+<h1>Wallet 💰</h1>
+<p>Check your balance or top up your wallet here.</p>
+
+<h2>Current Balance:</h2>
+<div id="balance">GHS 0.00</div>
+
+<h2>Top Up Wallet</h2>
+<input type="number" id="topupAmount" placeholder="Enter amount in Cedis">
+<br>
+<button class="btn" onclick="topUp()">Top Up</button>
+
+<br><br>
+<a href="index.html" class="btn">Back to Home</a>
+
+<script>
+let balance = 0;
+
+function updateBalance(){
+  document.getElementById("balance").innerText = "GHS " + balance.toFixed(2);
+}
+
+function topUp(){
+  let amount = parseFloat(document.getElementById("topupAmount").value);
+  if(isNaN(amount) || amount <= 0){
+    alert("Please enter a valid amount.");
+    return;
+  }
+
+  // Here you can integrate Paystack to pay the amount
+  // For now, we just simulate top-up
+  balance += amount;
+  updateBalance();
+  alert("🎉 Wallet topped up successfully! Current Balance: GHS " + balance.toFixed(2));
+  document.getElementById("topupAmount").value = "";
+}
+
+// Initialize
+updateBalance();
+</script>
+
+</body>
+</html>
