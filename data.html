@@ -6,8 +6,12 @@
 <title>Buy Data</title>
 
 <style>
-body{
+*{
+  box-sizing:border-box;
   font-family:Poppins, sans-serif;
+}
+
+body{
   background:linear-gradient(135deg,#e6f7ff,#ffffff);
   margin:0;
   padding:20px;
@@ -15,14 +19,17 @@ body{
   color:#003366;
 }
 
-h2{ margin-bottom:20px; }
+/* HEADINGS */
+h2{
+  margin-bottom:20px;
+}
 
 /* BUTTONS */
 .btn{
   padding:15px 20px;
   margin:10px;
   border:none;
-  border-radius:15px;
+  border-radius:18px;
   font-size:16px;
   font-weight:bold;
   cursor:pointer;
@@ -30,11 +37,14 @@ h2{ margin-bottom:20px; }
   color:white;
   box-shadow:0 0 15px rgba(0,0,0,0.2);
   transition:0.3s;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
 }
 
 .btn:hover{
   transform:scale(1.05);
-  background:#003cff;
 }
 
 /* NETWORK COLORS */
@@ -42,17 +52,27 @@ h2{ margin-bottom:20px; }
 .airtel{ background:#e60000; }
 .telecel{ background:#cc0000; }
 
-/* HIDDEN SECTIONS */
-.section{ display:none; }
+/* LOGOS */
+.logo{
+  width:30px;
+  height:30px;
+}
+
+/* SECTIONS */
+.section{
+  display:none;
+  margin-top:30px;
+}
 
 /* INPUT */
 input{
   padding:15px;
   width:80%;
   max-width:300px;
-  border-radius:10px;
+  border-radius:12px;
   border:2px solid #005eff;
   font-size:16px;
+  outline:none;
 }
 
 /* POPUP */
@@ -63,8 +83,8 @@ input{
   transform:translate(-50%,-50%);
   background:white;
   padding:30px;
-  border-radius:20px;
-  box-shadow:0 0 30px rgba(0,0,0,0.3);
+  border-radius:25px;
+  box-shadow:0 0 40px rgba(0,0,0,0.3);
   display:none;
   z-index:999;
 }
@@ -79,30 +99,39 @@ input{
 
 <h2>Select Network</h2>
 
-<!-- NETWORKS -->
+<!-- NETWORK SELECTION -->
 <div id="networks">
-  <button class="btn mtn" onclick="showPrices('mtn')">MTN</button>
-  <button class="btn airtel" onclick="showPrices('airtel')">AirtelTigo</button>
-  <button class="btn telecel" onclick="showPrices('telecel')">Telecel</button>
+  <button class="btn mtn" onclick="showPrices('mtn')">
+    <img src="mtn.png" class="logo"> MTN
+  </button>
+
+  <button class="btn airtel" onclick="showPrices('airtel')">
+    <img src="airteltigo.png" class="logo"> AirtelTigo
+  </button>
+
+  <button class="btn telecel" onclick="showPrices('telecel')">
+    <img src="telecel.png" class="logo"> Telecel
+  </button>
 </div>
 
-<!-- PRICES -->
+<!-- PRICE SECTION -->
 <div id="prices" class="section">
   <h2 id="priceTitle"></h2>
   <div id="priceButtons"></div>
 </div>
 
-<!-- PHONE NUMBER -->
+<!-- PHONE NUMBER SECTION -->
 <div id="numberSection" class="section">
   <h2>Enter Phone Number</h2>
-  <input type="tel" placeholder="e.g. 054xxxxxxx" id="phone"><br><br>
+  <input type="tel" id="phone" placeholder="e.g. 054xxxxxxx">
+  <br><br>
   <button class="btn" onclick="placeOrder()">Confirm Purchase</button>
 </div>
 
-<!-- POPUP -->
+<!-- SUCCESS POPUP -->
 <div id="popup">
   <h2>😁 Order placed successfully 😁</h2>
-  <p>Your data will be delivered shortly.</p>
+  <p>Your data bundle will be delivered within 5–30 minutes.</p>
   <button class="btn" onclick="closePopup()">OK</button>
 </div>
 
@@ -130,8 +159,10 @@ let prices = {
 
 function showPrices(network){
   document.getElementById("prices").style.display="block";
-  document.getElementById("priceTitle").innerText = network.toUpperCase()+" Prices";
-  document.getElementById("priceButtons").innerHTML = "";
+  document.getElementById("numberSection").style.display="none";
+  document.getElementById("priceButtons").innerHTML="";
+  document.getElementById("priceTitle").innerText =
+    network.toUpperCase()+" Prices";
 
   prices[network].forEach(p=>{
     let btn=document.createElement("button");
@@ -147,7 +178,7 @@ function showNumber(){
 }
 
 function placeOrder(){
-  let phone=document.getElementById("phone").value;
+  let phone=document.getElementById("phone").value.trim();
   if(phone.length < 9){
     alert("Please enter a valid phone number");
     return;
@@ -162,4 +193,4 @@ function closePopup(){
 </script>
 
 </body>
-  </html>
+</html>
