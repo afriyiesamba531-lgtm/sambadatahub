@@ -3,170 +3,163 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Buy Data - Samba531</title>
-<link rel="stylesheet" href="style.css">
+<title>Buy Data</title>
+
 <style>
-body {
+body{
+  font-family:Poppins, sans-serif;
+  background:linear-gradient(135deg,#e6f7ff,#ffffff);
   margin:0;
-  font-family:'Poppins',sans-serif;
-  background:#001f3f;
-  color:#00eaff;
-  overflow-x:hidden;
-  position:relative;
-}
-
-/* Particle background */
-.particle {
-  position:absolute;
-  width:8px;
-  height:8px;
-  background:#00eaff;
-  border-radius:50%;
-  opacity:0.7;
-  animation:floatParticle 10s linear infinite;
-}
-
-@keyframes floatParticle {
-  0% {transform:translateY(0) translateX(0); opacity:0.5;}
-  50%{opacity:1;}
-  100%{transform:translateY(-800px) translateX(100px); opacity:0;}
-}
-
-/* Floating Sidebar */
-#sidebar {
-  position:fixed;
-  top:10%;
-  left:10px;
-  display:flex;
-  flex-direction:column;
-  z-index:1000;
-}
-
-#sidebar .menu-item {
-  margin:10px 0;
-  padding:10px 14px;
-  border-radius:12px;
-  background:#001f3f;
-  color:#00eaff;
-  text-decoration:none;
-  font-weight:bold;
-  text-align:center;
-  box-shadow:0 0 10px #00eaff;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-#sidebar .menu-item:hover {
-  transform:translateX(5px);
-  box-shadow:0 0 25px #00eaff;
-}
-
-/* Floating WhatsApp button */
-#whatsapp {
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  background:#25D366;
-  color:#fff;
-  width:60px;
-  height:60px;
-  border-radius:50%;
-  text-align:center;
-  font-size:30px;
-  line-height:60px;
-  cursor:pointer;
-  box-shadow:0 0 15px #25D366;
-  z-index:1000;
-  transition:transform 0.2s,box-shadow 0.2s;
-}
-
-#whatsapp:hover {
-  transform:scale(1.1);
-  box-shadow:0 0 25px #25D366;
-}
-
-/* Bundle cards */
-.bundle-section {
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  margin-top:50px;
-  z-index:1;
-  position:relative;
-}
-
-.bundle-card {
-  background:#001f3f;
-  border-radius:12px;
   padding:20px;
-  margin:15px;
-  width:150px;
   text-align:center;
-  box-shadow:0 0 10px #00eaff;
+  color:#003366;
+}
+
+h2{ margin-bottom:20px; }
+
+/* BUTTONS */
+.btn{
+  padding:15px 20px;
+  margin:10px;
+  border:none;
+  border-radius:15px;
+  font-size:16px;
+  font-weight:bold;
   cursor:pointer;
-  transition:transform 0.2s,box-shadow 0.2s;
+  background:#005eff;
+  color:white;
+  box-shadow:0 0 15px rgba(0,0,0,0.2);
+  transition:0.3s;
 }
 
-.bundle-card:hover {
-  transform:translateY(-10px);
-  box-shadow:0 0 25px #00eaff;
+.btn:hover{
+  transform:scale(1.05);
+  background:#003cff;
 }
 
-.bundle-card h3 { margin:0; font-size:1.2rem; }
-.bundle-card p { margin:5px 0 0 0; }
+/* NETWORK COLORS */
+.mtn{ background:#ffcc00; color:black; }
+.airtel{ background:#e60000; }
+.telecel{ background:#cc0000; }
+
+/* HIDDEN SECTIONS */
+.section{ display:none; }
+
+/* INPUT */
+input{
+  padding:15px;
+  width:80%;
+  max-width:300px;
+  border-radius:10px;
+  border:2px solid #005eff;
+  font-size:16px;
+}
+
+/* POPUP */
+#popup{
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  background:white;
+  padding:30px;
+  border-radius:20px;
+  box-shadow:0 0 30px rgba(0,0,0,0.3);
+  display:none;
+  z-index:999;
+}
+
+#popup h2{
+  color:#00aa00;
+}
 </style>
 </head>
+
 <body>
 
-<!-- Sidebar -->
-<div id="sidebar">
-  <a href="index.html" class="menu-item">🏠 Home</a>
-  <a href="data.html" class="menu-item">📡 Buy Data</a>
-  <a href="wallet.html" class="menu-item">💰 Wallet</a>
-  <a href="transactions.html" class="menu-item">📄 History</a>
-  <a href="profile.html" class="menu-item">👤 Profile</a>
+<h2>Select Network</h2>
+
+<!-- NETWORKS -->
+<div id="networks">
+  <button class="btn mtn" onclick="showPrices('mtn')">MTN</button>
+  <button class="btn airtel" onclick="showPrices('airtel')">AirtelTigo</button>
+  <button class="btn telecel" onclick="showPrices('telecel')">Telecel</button>
 </div>
 
-<!-- WhatsApp -->
-<div id="whatsapp" onclick="window.open('https://chat.whatsapp.com/K0S5SJMX1scI6MVZ6LAw3p','_blank')">💬</div>
+<!-- PRICES -->
+<div id="prices" class="section">
+  <h2 id="priceTitle"></h2>
+  <div id="priceButtons"></div>
+</div>
 
-<!-- Particle background -->
-<div id="particles"></div>
+<!-- PHONE NUMBER -->
+<div id="numberSection" class="section">
+  <h2>Enter Phone Number</h2>
+  <input type="tel" placeholder="e.g. 054xxxxxxx" id="phone"><br><br>
+  <button class="btn" onclick="placeOrder()">Confirm Purchase</button>
+</div>
 
-<h2 style="text-align:center;margin-top:20px;">Select Your Network</h2>
-
-<div class="bundle-section">
-  <div class="bundle-card" onclick="window.location.href='purchase.html?network=MTN&bundle=1GB&price=5'">
-    <h3>MTN</h3>
-    <p>1GB - 5 GHS</p>
-    <p>2GB - 10 GHS</p>
-    <p>3GB - 15 GHS</p>
-  </div>
-  <div class="bundle-card" onclick="window.location.href='purchase.html?network=AirtelTigo&bundle=1GB&price=4.9'">
-    <h3>AirtelTigo</h3>
-    <p>1GB - 4.9 GHS</p>
-    <p>2GB - 9.8 GHS</p>
-    <p>3GB - 14.7 GHS</p>
-  </div>
-  <div class="bundle-card" onclick="window.location.href='purchase.html?network=Telecel&bundle=5GB&price=27'">
-    <h3>Telecel</h3>
-    <p>5GB - 27 GHS</p>
-    <p>10GB - 49 GHS</p>
-    <p>15GB - 65 GHS</p>
-  </div>
+<!-- POPUP -->
+<div id="popup">
+  <h2>😁 Order placed successfully 😁</h2>
+  <p>Your data will be delivered shortly.</p>
+  <button class="btn" onclick="closePopup()">OK</button>
 </div>
 
 <script>
-// Generate floating neon particles
-for(let i=0;i<50;i++){
-  const particle = document.createElement('div');
-  particle.classList.add('particle');
-  particle.style.left = Math.random()*window.innerWidth + 'px';
-  particle.style.top = Math.random()*window.innerHeight + 'px';
-  particle.style.animationDuration = (5 + Math.random()*5)+'s';
-  particle.style.width = particle.style.height = (3 + Math.random()*5)+'px';
-  document.body.appendChild(particle);
+let prices = {
+  mtn:[
+    "1GB - 5 Cedis",
+    "2GB - 10 Cedis",
+    "3GB - 15 Cedis",
+    "4GB - 20 Cedis",
+    "5GB - 25 Cedis",
+    "6GB - 30 Cedis"
+  ],
+  airtel:[
+    "1GB - 4.90 Cedis",
+    "2GB - 9.80 Cedis",
+    "3GB - 14.70 Cedis"
+  ],
+  telecel:[
+    "5GB - 27 Cedis",
+    "10GB - 49 Cedis",
+    "15GB - 65 Cedis"
+  ]
+};
+
+function showPrices(network){
+  document.getElementById("prices").style.display="block";
+  document.getElementById("priceTitle").innerText = network.toUpperCase()+" Prices";
+  document.getElementById("priceButtons").innerHTML = "";
+
+  prices[network].forEach(p=>{
+    let btn=document.createElement("button");
+    btn.className="btn";
+    btn.innerText=p;
+    btn.onclick=()=>showNumber();
+    document.getElementById("priceButtons").appendChild(btn);
+  });
+}
+
+function showNumber(){
+  document.getElementById("numberSection").style.display="block";
+}
+
+function placeOrder(){
+  let phone=document.getElementById("phone").value;
+  if(phone.length < 9){
+    alert("Please enter a valid phone number");
+    return;
+  }
+  document.getElementById("popup").style.display="block";
+}
+
+function closePopup(){
+  document.getElementById("popup").style.display="none";
+  location.reload();
 }
 </script>
 
 </body>
-</html>
+  </html>
