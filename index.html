@@ -34,18 +34,18 @@ p{ margin-bottom:20px; font-size:18px;}
 .btn{ padding:15px 25px; margin:10px; border:none; border-radius:16px; font-size:16px; font-weight:bold; cursor:pointer; background:#005eff; color:white; box-shadow:0 4px 12px rgba(0,0,0,0.2); transition:0.3s; text-decoration:none; display:inline-block;}
 .btn:hover{ transform:scale(1.05); }
 
-/* Floating vertical menu */
+/* Floating vertical menu - shifted to avoid covering text */
 #navBar{
   position:fixed;
   top:50%;
-  left:10px;
+  left:5px;
   transform:translateY(-50%);
   display:flex;
   flex-direction:column;
   z-index:1000;
 }
 #navBar a{
-  margin:8px 0;
+  margin:12px 0;
   background:#005eff;
   color:white;
   text-decoration:none;
@@ -95,11 +95,20 @@ p{ margin-bottom:20px; font-size:18px;}
   margin-right:8px;
   color:#00aa00;
 }
+
+/* Welcome message */
+#welcome-msg{
+  font-size:20px;
+  color:#003366;
+  margin-bottom:15px;
+  font-weight:bold;
+}
 </style>
 </head>
 <body>
 
-<h1>Welcome to Samba531 Data! 🎉</h1>
+<h1>Samba531 Data! 🎉</h1>
+<p id="welcome-msg">Welcome Guest</p>
 <p>Your one-stop shop for fast, reliable mobile data bundles. Note: The bundle is not instant, takes about 5–30 minutes. Thank you!</p>
 
 <a href="data.html" class="btn">Buy Data</a>
@@ -144,6 +153,15 @@ function createBubble(){
   setTimeout(()=>{ bubble.remove(); },10000);
 }
 setInterval(createBubble,500);
+
+// === Personalize welcome message ===
+function loadWelcome(){
+  let savedName = localStorage.getItem("username");
+  if(savedName){
+    document.getElementById("welcome-msg").innerText = "Welcome " + savedName;
+  }
+}
+loadWelcome();
 </script>
 
 </body>
